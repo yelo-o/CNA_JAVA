@@ -16,6 +16,12 @@ public class TV {
 		onOff = true;
 		return onOff;
 	}
+	// .length : 배열용 특수 클래스를 위한 멤버 변수(필드) * 예약어 아님!
+	// 강사님 코드
+//	void powerOn() {
+//		onOff = true
+//	}
+	
 	/**
 	 * TV 전원을 끈다
 	 * @return onOff를 false로 반환한다

@@ -3,6 +3,7 @@ public class TVUser {
 
 	public static void main(String[] args) {
 		TV tv = new TV();
+		System.out.println(tv.channel);
 		tv.powerOn(); // 티비를 켠다
 		if(tv.isPower()) { // 티비가 켜져있다면
 			tv.print(); // 티비의 정보를 출력한다

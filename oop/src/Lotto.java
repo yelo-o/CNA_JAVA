@@ -4,7 +4,7 @@
  * @version 1.0
  */
 public class Lotto {
-	int []lotto = new int[6];
+	int []lotto = new int[6]; // 참조형 멤버 변수
 	
 	/**
 	 * 로또숫자 계산한다
