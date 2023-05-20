@@ -23,10 +23,29 @@ public class SortTest {
 		System.out.println();
 		System.out.println();
 		
-		
 		// 2. 선택정렬
 		System.out.println("---선택정렬---");
+		
+		temp = 0;
+		int indexMin;
+		arr = new int[] {3,2,1,5,4};
+		for(int i=0;i<arr.length;i++) {
+			indexMin = i;
+			for(int j=i+1;j<arr.length;j++) {
+				if(arr[indexMin] > arr[j]) {
+					indexMin = j;
+				}
+			}
+			// 스왑
+			temp = arr[indexMin];
+			arr[indexMin] = arr[i];
+			arr[i] = temp;
+		}
+		
+		for(int i=0;i<arr.length;i++) {
+			System.out.print(arr[i]);
+		}
 
-	}
+		}
 
 }
