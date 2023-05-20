@@ -29,7 +29,7 @@ public class SortTest {
 		temp = 0;
 		int indexMin;
 		arr = new int[] {3,2,1,5,4};
-		for(int i=0;i<arr.length;i++) {
+		for(int i=0;i<arr.length-1;i++) {
 			indexMin = i;
 			for(int j=i+1;j<arr.length;j++) {
 				if(arr[indexMin] > arr[j]) {
