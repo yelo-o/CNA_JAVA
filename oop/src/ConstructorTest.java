@@ -52,6 +52,30 @@ class C{
 	}
 }
 
+class Employee{
+	String empNo;
+	String empName;
+	int salary = 0;
+	Employee(){
+		
+	}
+	
+	Employee(String empNo, String empName, int salary){
+		this.empNo = empNo;
+		this.empName = empName;
+		this.salary = salary;
+	}
+	Employee(String empNo, String empName){
+		this.empNo = empNo;
+		this.empName = empName;
+	}
+	
+	void print() {
+		System.out.println("사번:"+ empNo + " ,사원명:" + empName+ ", 기본급:" + salary);
+	}
+	
+}
+
 public class ConstructorTest {
 
 	public static void main(String[] args) {
@@ -83,5 +107,19 @@ public class ConstructorTest {
 		
 		R2 r3 = new R2(8); // 가로8, 세로8인 사각형 객체
 		r3.print(); // "가로8, 세로8인 사각형의 면적은 64.0입니다" 출력
+		
+		Employee e1 = new Employee();
+		e1.empNo = "2301";
+		e1.empName = "오문정";
+		e1.salary = 10000;
+		
+		Employee e2 = new Employee("2302", "홍길동", 10000);
+		Employee e3 = new Employee("2303", "나자바");
+		
+		e1.print(); // "사번:2301, 사원명:오문정, 기본급:10000"
+		e2.print(); // "사번:2302, 사원명:홍길동, 기본급:10000"
+		e3.print(); // "사번:2303, 사원명:나자바, 기본급:0"
+		
+		
 	}
 }
