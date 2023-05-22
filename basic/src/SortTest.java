@@ -45,7 +45,11 @@ public class SortTest {
 		for(int i=0;i<arr.length;i++) {
 			System.out.print(arr[i]);
 		}
+		System.out.println();
 
+		int[] numbers = new int[] {1,2,3,4,5};
+		for(int number : numbers){
+			System.out.print(number+" ");
 		}
-
+	}
 }
