@@ -21,22 +21,6 @@ public class LottoUser {
 		lotto1.make();
 		lotto1.print();
 		
-		// String 타입 비교
-		// 메모리 비교
-		System.out.println("메모리 비교");
-		String s1 = new String("Hello");
-		String s2 = "Hello";
-		String s3 = new String("Hello");
-		String s4 = "Hello"; // s4 = s2;
-		System.out.println(s1==s2);
-		System.out.println(s1==s3);
-		System.out.println(s1==s4);
-		System.out.println(s2==s4);
-		
-		// 문자열 자체 비교
-		System.out.println("문자열 비교");
-		System.out.println(s1.equals(s2));
-		
 	}
 
 }

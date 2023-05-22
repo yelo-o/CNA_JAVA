@@ -116,9 +116,20 @@ public class StringTest {
 		// 쿼리변수이름과 변수값을 출력하시오 변수이름: sid 변수값:103
 		System.out.println("변수이름 : " + queryDatas[0] + " 변수값 : " + queryDatas[1] );
 		
-		
+		String fileName = "a.b.txt";
+		parseName(fileName);
 		
 	}
+	static void parseName(String fileName) {
+		// TODO 파일의 확장자를 구분한다 
+		// ex) a.txt 파일인 경우 "확장자는 txt입니다" 를 출력
+		// indexOf : 해당 문자열이 처음으로 나오는 곳을 가리킴
+		// lastIndexOf : 해당 문자열이 마지막으로 나오는 곳을 가리킴
+		int indexNo = fileName.lastIndexOf(".");
+		System.out.println("확장자는 "+ fileName.substring(indexNo+1) + "입니다");
+		
+	}
+	
 	// 강사님 코드
 	/*
 	static void parseURL(String url) {

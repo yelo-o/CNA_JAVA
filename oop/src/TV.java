@@ -1,5 +1,6 @@
 /**
- * TV 상태 확인하기
+ * TV 객체용 클래스
+ * 
  * @author 김민규
  * @version 1.0
  */
@@ -9,30 +10,23 @@ public class TV {
 	int vol = 0;
 	boolean onOff = false;
 	/**
-	 * TV 전원을 켠다
-	 * @return onOff를 true로 반환한다
+	 * 전원을 켠다
 	 */
-	public boolean powerOn() {
-		onOff = true;
-		return onOff;
-	}
 	// .length : 배열용 특수 클래스를 위한 멤버 변수(필드) * 예약어 아님!
 	// 강사님 코드
-//	void powerOn() {
-//		onOff = true
-//	}
+	void powerOn() {
+		onOff = true;
+	}
 	
 	/**
 	 * TV 전원을 끈다
-	 * @return onOff를 false로 반환한다
 	 */
-	public boolean powerOff() {
+	void powerOff() {
 		onOff = false;
-		return onOff;
 	}
 	/**
-	 * onOff의 true/false 판단하여 boolean값 반환
-	 * @return true 또는 false 반환
+	 * 전원을 확인한다
+	 * @return 켜져있으면 true 반환 , 꺼져있으면 false 반환
 	 */
 	public boolean isPower() {
 		if(onOff==true) {
