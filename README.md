@@ -48,8 +48,29 @@
     <img src="https://github.com/yelo-o/CNA_JAVA/assets/64743180/96fd1962-27d2-4a16-ade8-501e5b55c62a">
 </p>
 
-### final
-	- 끝이다. abstract과 반대 개념
-	- 클래스, 메서드, 멤버변수, 지역변수
+### package
+	다른 패키지에 있는 클래스를 사용하려면 import 사용 ex) import com.my.asia.Korea
+	
+### 접근제어자(Access Modifier)
+	- 종류 : public / protected / package(default) / private
+	- 멤버변수 : 상수-public, 변수-private
+	- 정보은닉용도
+	
+### 객체생성법
 
 
+### 생성자
+객체 생성시 자동호출되는 특수메서드
+생성자명은 클래스명과 같고 반환형 없음
+생성자가 없으면 기본 상태 
+public class의 기본생성자는 public으로
+default class의 기본생성자는 default로 만들어짐
+
+### 자바빈(JavaBean)
+	자바빈 = 컴포넌트
+	컴포넌트란? : 객체보다 재사용성이 더 높은 큰 덩어리
+	자바빈의 조건
+		1. public class
+		2. public 매개변수없는 생성자
+		3. property용 멤버변수는 public이면 안됨
+		4. property용 public setter메서드/getter메서드 필요 
