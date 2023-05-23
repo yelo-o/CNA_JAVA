@@ -45,7 +45,7 @@ class C{
 	}
 	
 	void make() {
-		area = radius * radius * pi;
+		area = radius * radius * Math.PI;
 	}
 	void print() {
 		System.out.println("반지름이 " + radius + "인 원의 면적은 " + area + "입니다");
@@ -59,12 +59,6 @@ class Employee{
 	Employee(){
 		
 	}
-	/**
-	 * 객체 생성 시 사번과 이름을 초기화한다
-	 * @param empNo 사번
-	 * @param empName 이름
-	 * @param salary 급여
-	 */
 	Employee(String empNo, String empName){
 		this(empNo, empName,0);
 	}

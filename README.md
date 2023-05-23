@@ -33,5 +33,18 @@
 
 ### this 메모리 구조 예시
 <p align="center">
-    <img src="https://github.com/yelo-o/CNA_JAVA/assets/64743180/2239d582-87ed-457a-8ff3-c222e8f3d41a">
+    <img src="https://github.com/yelo-o/CNA_JAVA/assets/64743180/ff4cd0d5-6173-40cf-adbd-c295326cf02b">
 </p>
+
+
+### static
+	- 객체 단위로 관리되어야 하는 것은 static으로 만들지 말라
+	- 메모리 효율성 측면에서 웬만하면 만들지 않는 것을 추천
+	- this 예약어 쓸 수 없음
+	- 인스턴스 메서드 사용 불가
+	
+### static 메모리 구조 예시
+<p align="center">
+    <img src="https://github.com/yelo-o/CNA_JAVA/assets/64743180/96fd1962-27d2-4a16-ade8-501e5b55c62a">
+</p>
+
