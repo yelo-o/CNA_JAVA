@@ -48,3 +48,8 @@
     <img src="https://github.com/yelo-o/CNA_JAVA/assets/64743180/96fd1962-27d2-4a16-ade8-501e5b55c62a">
 </p>
 
+### final
+	- 끝이다. abstract과 반대 개념
+	- 클래스, 메서드, 멤버변수, 지역변수
+
+
