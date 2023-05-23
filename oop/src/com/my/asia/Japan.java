@@ -1,9 +1,14 @@
 package com.my.asia;
 
 public class Japan {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	Korea k;
+	public Japan(){
+		k = new Korea();
+		k.capital = "평양";
+		k.language = "일본어";
+//		k.population = -1;
+		
+		
 
 	}
 
