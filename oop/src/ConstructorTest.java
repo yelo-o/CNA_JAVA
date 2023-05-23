@@ -59,15 +59,19 @@ class Employee{
 	Employee(){
 		
 	}
-	
+	/**
+	 * 객체 생성 시 사번과 이름을 초기화한다
+	 * @param empNo 사번
+	 * @param empName 이름
+	 * @param salary 급여
+	 */
+	Employee(String empNo, String empName){
+		this(empNo, empName,0);
+	}
 	Employee(String empNo, String empName, int salary){
 		this.empNo = empNo;
 		this.empName = empName;
 		this.salary = salary;
-	}
-	Employee(String empNo, String empName){
-		this.empNo = empNo;
-		this.empName = empName;
 	}
 	
 	void print() {
