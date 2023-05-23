@@ -75,7 +75,8 @@ class Employee{
 	}
 	
 	void print() {
-		System.out.println("사번:"+ empNo + " ,사원명:" + empName+ ", 기본급:" + salary);
+//		System.out.println("사번:"+ empNo + " ,사원명:" + empName+ ", 기본급:" + salary); // 이것도 되긴 함
+		System.out.println("사번:"+ this.empNo + " ,사원명:" + this.empName+ ", 기본급:" + this.salary);
 	}
 	
 }
@@ -123,7 +124,6 @@ public class ConstructorTest {
 		e1.print(); // "사번:2301, 사원명:오문정, 기본급:10000"
 		e2.print(); // "사번:2302, 사원명:홍길동, 기본급:10000"
 		e3.print(); // "사번:2303, 사원명:나자바, 기본급:0"
-		
 		
 	}
 }
