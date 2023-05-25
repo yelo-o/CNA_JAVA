@@ -73,4 +73,16 @@ default class의 기본생성자는 default로 만들어짐
 		1. public class
 		2. public 매개변수없는 생성자
 		3. property용 멤버변수는 public이면 안됨
-		4. property용 public setter메서드/getter메서드 필요 
+		4. property용 public setter메서드/getter메서드 필요
+
+# 2023.05.25(목)
+
+## 상속
+	- 다중 상속 안됨
+	- 부모의 private 멤버 변수/메서드는 자식에게 물려줄 수 있다.
+		- 다만, 자식이 접근을 못할 뿐
+	- 
+## super	
+	- 의미 : 현재 사용중인 객체의 부모 영역
+	- 메소드 내에서만 사용 가능
+	- ※ this : 현재 사용중인 객체
