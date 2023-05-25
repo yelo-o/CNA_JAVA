@@ -40,40 +40,29 @@ public class ProductRepository{
 		//        totalCnt++;
 	}
 
-	public void erase(String prodNo) {
-		// 기존 등록된 product 모든 정보 가져옴
-		System.out.println("저장소에 저장된 totalCnt는 : " + totalCnt);
-		Product[] all = new Product[totalCnt];
-		for(int i=0; i<totalCnt; i++){
-			all[i] = pArr[i];
-		}
-		// prodNo가 매칭되는 것 카운트
-		int cnt = 0;
-		int index = 0;
-		for(int i=0;i<totalCnt;i++) {
-			Product p = pArr[i];
-			if (p.getProdNo().equals(prodNo)) {
-				all[index] = p;
-				index++;
-				cnt++;
+	public void erase(String no) {
+		int index=totalCnt;
+		for (int i=0; i<totalCnt;i++) {
+			if (pArr[i].getProdNo().equals(no)) {
+				index=i;
+				break;
 			}
 		}
-		System.out.println(all);
-		/*
-		// cnt에 맞는 배열 재생성
-		all = new Product[cnt];
-		for(int i=0;i<totalCnt;i++) {
-			Product p = pArr[i];
-			if(!p.getProdName().equals(prodNo)) {
-				all[index] = p;
-				index++;
-			}
+		if(index==totalCnt) { //삭제할 번호 없으면
+			System.out.println("삭제할 상품번호가 존재하지 않습니다.");
+			return;
 		}
-		*/
-//		return all;
-			
+		else if (index==totalCnt-1) { //끝에 요소 삭제할 경우
+			totalCnt--;
+			System.out.println("삭제가 완료되었습니다.");
+		}else { //중간삭제인 경우 
+			for (int i=index+1;i<totalCnt;i++) {
+				pArr[i-1]=pArr[i];				
+			}
+			totalCnt--;
+		}
 	}
-	
+
 	public Product selectByProdNo(String no){
 		//상품번호에 해당하는 상품을 저장소에서 찾아 상품을 반환한다
 		for(int i=0; i<totalCnt; i++){
@@ -95,7 +84,7 @@ public class ProductRepository{
 				cnt++;
 			}
 		}
-		
+
 		all = new Product[cnt];
 		int index = 0;
 		for(int i=0;i<totalCnt;i++) {
@@ -106,11 +95,19 @@ public class ProductRepository{
 			}
 		}
 		return all;
-		
+
 	}
-	
-	public Product fix(String no) {
-		return null;
+
+	public void fix(String chNo, String prodNo, String prodName, int prodPrice) {
+		int idx = 0;
+		for(int i=0; i<totalCnt;i++) {
+			if(pArr[i].getProdNo().equals(chNo)){
+				idx = i;
+			}
+		}
+		pArr[idx].setProdNo(prodNo);
+		pArr[idx].setProdName(prodName);
+		pArr[idx].setProdPrice(prodPrice);
 	}
 
 	public Product[] selectAll(){

@@ -55,9 +55,18 @@ public class ProductUser{
 	
 	public void modify() {
 		System.out.println(">>상품수정<<");
-		System.out.print("상품번호를 입력하세요:");
+		System.out.print("수정할 상품번호를 입력하세요:");
+		String chNo = sc.nextLine();
+		
+		System.out.print("변경후 상품번호를 입력하세요:");
 		String prodNo = sc.nextLine();
-		repository.fix(prodNo);
+		
+		System.out.println("변경후 상품명을 입력하세요:");
+		String prodName = sc.nextLine();
+		
+		System.out.println("변경후 상품가격을 입력하세요:");
+		int prodPrice = Integer.parseInt(sc.nextLine());
+		repository.fix(chNo, prodNo, prodName, prodPrice);
 	}
 	
 	public void delete() {
@@ -65,8 +74,6 @@ public class ProductUser{
 		System.out.print("상품번호를 입력하세요:");
 		String prodNo = sc.nextLine();
 		repository.erase(prodNo);
-		
-		
 	}
 	
 	

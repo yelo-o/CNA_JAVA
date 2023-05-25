@@ -12,7 +12,6 @@ public class Product{
 		this.prodNo = prodNo;
 		this.prodName = prodName;
 		this.prodPrice = prodPrice;
-		
 	}
 	public String getProdNo() {
 		return prodNo;
