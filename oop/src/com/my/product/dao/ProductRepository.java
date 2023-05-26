@@ -31,7 +31,7 @@ public class ProductRepository{
 			for(int j=0;j<i;j++) {
 				if(pArr[i].getProdNo().equals(pArr[j].getProdNo())) {
 					System.out.println("이미 존재하는 상품입니다");
-					i--;
+					totalCnt--;
 					return;
 				}
 			}
@@ -41,24 +41,11 @@ public class ProductRepository{
 	}
 
 	public void erase(String no) {
-		int index = totalCnt;
+		//		int index = totalCnt;
 		for (int i=0; i<totalCnt;i++) {
 			if (pArr[i].getProdNo().equals(no)) {
-				index = i;
-				//				break;
-				if(index == totalCnt) { //삭제할 번호 없으면
-					System.out.println("삭제할 상품번호가 존재하지 않습니다.");
-					return;
-				}
-				else if (index == totalCnt-1) { //끝에 요소 삭제할 경우
-					totalCnt--;
-					System.out.println("삭제가 완료되었습니다.");
-				}else { //중간삭제인 경우 
-					for (int j=index+1;j<totalCnt;j++) {
-						pArr[j-1]=pArr[j];				
-					}
-					totalCnt--;
-				}
+				pArr[i] = pArr[i+1];
+				totalCnt--;
 			}
 		}
 	}
