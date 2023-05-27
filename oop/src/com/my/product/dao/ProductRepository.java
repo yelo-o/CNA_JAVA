@@ -42,9 +42,12 @@ public class ProductRepository{
 
 	public void erase(String no) {
 		//		int index = totalCnt;
+		int idx = 0;
 		for (int i=0; i<totalCnt;i++) {
 			if (pArr[i].getProdNo().equals(no)) {
-				pArr[i] = pArr[i+1];
+				idx = i;
+				for(idx=i+1;idx<totalCnt;idx++)
+				pArr[idx-1] = pArr[idx];
 				totalCnt--;
 			}
 		}
