@@ -1,7 +1,6 @@
 class Single{
 	static private Single s = new Single();
-	private Single(){
-	}
+	private Single(){}
 	static Single getInstance() {
 //		return null; // null값으로 s1 == s2 이 되어버림
 //		return new Single();

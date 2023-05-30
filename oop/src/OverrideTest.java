@@ -1,8 +1,6 @@
-class Shape{
-	double area;
-	void make() {
-		
-	}
+abstract class Shape{
+	protected double area;
+	abstract void make(); //하위클래스에서 반드시 재정의해야할 메서드
 	void print() {
 		System.out.println("면적은 "+ area);
 	}
@@ -11,9 +9,13 @@ class Shape{
 	}
 }
 class Circle extends Shape{
-	int radius;
+	private int radius;
 	Circle(int radius){
-		this.radius = radius;
+		if(radius > 0) {
+			this.radius = radius;
+		}else {
+			System.out.println("반지름은 0보다 커야합니다");
+		}
 	}
 	void make() {
 		this.area = Math.PI * Math.pow(radius, 2);
@@ -27,10 +29,12 @@ class Circle extends Shape{
 	}
 }
 class Rectangle extends Shape{
-	int width, height;
+	private int width, height;
 	Rectangle(int width, int height){
-		this.width = width;
-		this.height = height;
+		if(width>0 && height>0) {
+			this.width = width;
+			this.height = height;
+		}
 	}
 	void make() {
 		area = width * height;
@@ -41,6 +45,11 @@ class Rectangle extends Shape{
 	}
 }
 class Triangle{
+	public static void test(Shape s) {
+		s.make();
+		s.print();
+		System.out.println(s); //s.toString() 메서드 호출됨
+	}
 }
 
 public class OverrideTest {
@@ -68,6 +77,9 @@ public class OverrideTest {
 //		r.mr();
 //		r.print();
 		test(r);
+		
+		Shape s;
+//		s = new Shape(); //abstract class는 객체 생성 불가
 	}
 
 }

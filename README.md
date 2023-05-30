@@ -81,8 +81,52 @@ default class의 기본생성자는 default로 만들어짐
 	- 다중 상속 안됨
 	- 부모의 private 멤버 변수/메서드는 자식에게 물려줄 수 있다.
 		- 다만, 자식이 접근을 못할 뿐
-	- 
+	- 상위클래스의 멤버변수와 메서드는 하위클래스에게 상속 됨. 하위클래스가 간결해짐
 ## super	
 	- 의미 : 현재 사용중인 객체의 부모 영역
 	- 메소드 내에서만 사용 가능
 	- ※ this : 현재 사용중인 객체
+	
+## 해시코드
+	- 객체 정보값
+	- UML표기법 
+		+hashcode():int
+
+## 오버라이딩
+	* 정의 : 상위클래스의 메서드를 하위클래스에서 재정의
+	* 규칙
+		- 상속관계의 메서드
+		- 메서드 이름, 매개변수, 반환형 같아야 한다
+		- 하위클래스의 메서드 접근 범위 >= 상위클래스의 메서드 접근 범위
+			public							       public
+			public, default						   default
+			public, default, private			   private	
+
+sysout(new A(5)); // A@XXXXXXXXXX 
+-> void println(Object obj){; -> String의 valueOf(Object x){; -> x.toString() 호출 됨
+
+## 자바최상위 클래스
+	java.lang.Object
+	
+## abstract 예약어
+	- abstract 메서드 : 하위 클래스에서 반드시 재정의가 되어야할 메서드 → 추상 메서드
+	- 추상메서드를 포함하고 있는 클래스는 반드시 추상클래스가 되어야 함
+	
+## abstract vs final
+abstract 메서드 : 반드시 하위클래스에서 재정의되어야 한다
+final 메서드 : 하위클래스에서 재정의되면 안된다
+
+public abstract class Test{
+	abstract void m() {}
+	final void m1() {}
+}
+
+class TestChild1 extends Test{} -- ERROR : m()재정의 안됨
+class TestChild2 extends Test{void m(){} voidm1(){}} -- ERROR : m1() 재정의 금지된 메서드를 재정의 함
+
+
+## 인터페이스
+	시스템에 접속할 수 있는 접속장치
+	
+## SOLID 원칙
+	객체지향의 SOLID 원칙이 무엇인지에 대해서 공부해 올 것
