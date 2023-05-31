@@ -1,13 +1,19 @@
 package com.my.product.dao;
 import com.my.product.dto.Product;
 public class ProductRepository{
-	//    private Product[] pArr = new Product[5]; // 상품 저장소
 	private Product[] pArr;
 	private int totalCnt = 0; // 저장소에 저장된 상품수
+	/**
+	 * 최대 5개의 상품이 저장될 수 있는 저장소를 만든다.
+	 */
 	//생성자
 	public ProductRepository() {
 		this.pArr = new Product[5];
 	}
+	/**
+	 * 저장소를 만든다
+	 * @param maxSize 최대상품수
+	 */
 	public ProductRepository(int maxSize) {
 		if(maxSize <= 0) {
 			System.out.println("저장소의 크기는 1이상이어야합니다, 크기를 최소값인 5로 수정합니다");
@@ -15,29 +21,37 @@ public class ProductRepository{
 		}	
 		pArr = new Product[maxSize];
 	}
-	public void insert(Product p){
-		/** TODO
-		 * 저장소에 상품번호가 이미 존재하면
-		 * "이미 존재하는 상품입니다" 출력하고
-		 * 존재하지 않을 경우만 상품을 저장한다
-		 */
-		if(totalCnt >= pArr.length) {
-			System.out.println("저장소가 꽉찼습니다. 현재 상품수는 " + totalCnt + "입니다");
-			return;
-		}
-		pArr[totalCnt++] = p;
+	
+	/**
+	 * 상품을 저장소에 추가한다
+	 * 상품번호가 존재할 경우 "이미 존재하는 상품입니다" 메시지를 갖는 예외 발생
+	 * @param p 저장할 상품
+	 */
+	public void insert(Product p) {
+		//예외처리방법 1 앞단에서 totalCnt & 배열 길이 확인
+//		if(totalCnt >= pArr.length) {
+//			System.out.println("저장소가 꽉찼습니다. 현재 상품수는 " + totalCnt + "입니다");
+//			return;
+//		}
 		// 중복확인
-		for(int i=0;i<totalCnt;i++) {
-			for(int j=0;j<i;j++) {
-				if(pArr[i].getProdNo().equals(pArr[j].getProdNo())) {
-					System.out.println("이미 존재하는 상품입니다");
-					totalCnt--;
-					return;
-				}
-			}
+		for(int i=0; i<totalCnt;  i++) {
+    		Product p1 = pArr[i]; //저장소의 상품
+    		String p1ProdNo = p1.getProdNo(); //저장소의 상품의 상품번호
+    		String pProdNo = p.getProdNo(); //저장하려는 상품의 상품번호
+    		if(pProdNo.equals(p1ProdNo)) {
+    		//if(p.getProdNo().equals(pArr[i].getProdNo())) {
+    			System.out.println("이미 존재하는 상품입니다");
+    			return;
+    		}
+    	}
+		//예외처리방법 2 뒷단에서
+		try {
+//			pArr[totalCnt++] = p; //Bad Code
+			pArr[totalCnt] = p; //Good Code
+			totalCnt++;
+		}catch(ArrayIndexOutOfBoundsException e) {
+			System.out.println("저장소가 꽉찼습니다. 현재 상품수는 " + totalCnt + "입니다");
 		}
-		//        pArr[totalCnt] = p;
-		//        totalCnt++;
 	}
 
 	public void erase(String no) {

@@ -18,10 +18,14 @@ import javax.swing.JTextField;
  * 4) 이벤트소스와 이벤트핸들로 연결
  * 	  bt.addActionListener(new MyHandler());
  */
+
+
 /*
  * 콘솔에 한줄입력란의 내용이 출력
  */
 
+
+/* MyHandler라는 클래스를 outer class(GUITest)에 inner class(Handler)로 이동
 class MyHandler implements ActionListener{
 	private JTextField tf;
 	MyHandler(JTextField tf){
@@ -33,15 +37,15 @@ class MyHandler implements ActionListener{
 		System.out.println(line);
 	}
 }
-
+ */
 public class GUITest {
 	private JFrame fr;
 	private JButton bt;
 	private JTextField tf;
-	
-	class Handler implements ActionListener{ //Handler는 GUITest의 inner 클래스로 들어옴 
+
+	class Handler implements ActionListener{ 
 		public void actionPerformed(ActionEvent e){
-//			System.out.println("클릭");
+			//			System.out.println("클릭");
 			String line = tf.getText();
 			System.out.println(line);
 		}
@@ -55,7 +59,15 @@ public class GUITest {
 		c.add(tf); //컴포넌트 추가
 		c.add(bt); // 컴포넌트 추가
 		//4)이벤트소스와 이벤트핸들러 연결
-		bt.addActionListener(new Handler());
+		//		bt.addActionListener(new Handler());
+		bt.addActionListener(
+			new ActionListener(){ //ActionListener 인터페이스를 구현한 하위 클래스 타입의 객체 생성
+				public void actionPerformed(ActionEvent e){
+					String line = tf.getText();
+					System.out.println(line);
+				}
+			}
+				);
 		fr.setSize(300,200); //프레임 크기 지정
 		fr.setVisible(true); //프레임 보여주기
 	}
