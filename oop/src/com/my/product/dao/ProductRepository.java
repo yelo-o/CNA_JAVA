@@ -24,7 +24,7 @@ public class ProductRepository{
 		}	
 		pArr = new Product[maxSize];
 	}
-	
+
 	/**
 	 * 상품을 저장소에 추가한다
 	 * @param p 저장할 상품
@@ -33,28 +33,28 @@ public class ProductRepository{
 	 * 	저장소가 꽉찼을 경우 "저장소가 꽉찼습니다. 현재상품수" 메시지를 갖는 예외
 	 */
 	public void insert(Product p) throws AddException{
-//		if(totalCnt >= pArr.length) {
-//			System.out.println("저장소가 꽉찼습니다. 현재 상품수는 " + totalCnt + "입니다");
-//			return;
-//		}
+		//		if(totalCnt >= pArr.length) {
+		//			System.out.println("저장소가 꽉찼습니다. 현재 상품수는 " + totalCnt + "입니다");
+		//			return;
+		//		}
 		// 중복확인
 		for(int i=0; i<totalCnt;  i++) {
-    		Product p1 = pArr[i]; //저장소의 상품
-    		String p1ProdNo = p1.getProdNo(); //저장소의 상품의 상품번호
-    		String pProdNo = p.getProdNo(); //저장하려는 상품의 상품번호
-    		if(pProdNo.equals(p1ProdNo)) {
-    		//if(p.getProdNo().equals(pArr[i].getProdNo())) {
-//    			System.out.println("이미 존재하는 상품입니다");
-//    			return;
-    			throw new AddException("이미 존재하는 상품입니다"); //강제 예외 발생
-    		}
-    	}
+			Product p1 = pArr[i]; //저장소의 상품
+			String p1ProdNo = p1.getProdNo(); //저장소의 상품의 상품번호
+			String pProdNo = p.getProdNo(); //저장하려는 상품의 상품번호
+			if(pProdNo.equals(p1ProdNo)) {
+				//if(p.getProdNo().equals(pArr[i].getProdNo())) {
+				//    			System.out.println("이미 존재하는 상품입니다");
+				//    			return;
+				throw new AddException("이미 존재하는 상품입니다"); //강제 예외 발생
+			}
+		}
 		try {
-//			pArr[totalCnt++] = p; //Bad Code <-catch 되기 전에 수가 증가해버림
+			//			pArr[totalCnt++] = p; //Bad Code <-catch 되기 전에 수가 증가해버림
 			pArr[totalCnt] = p; //Good Code
 			totalCnt++;
 		}catch(ArrayIndexOutOfBoundsException e) {
-//			System.out.println("저장소가 꽉찼습니다. 현재 상품수는 " + totalCnt + "입니다");
+			//			System.out.println("저장소가 꽉찼습니다. 현재 상품수는 " + totalCnt + "입니다");
 			throw new AddException("저장소가 꽉찼습니다. 현재 상품수는 " + totalCnt + "입니다"); //강제 예외 발생
 		}
 	}
@@ -71,34 +71,34 @@ public class ProductRepository{
 			if (pArr[i].getProdNo().equals(prodNo)) {
 				idx = i;
 				for(idx=i+1;idx<totalCnt;idx++)
-				pArr[idx-1] = pArr[idx];
+					pArr[idx-1] = pArr[idx];
 				totalCnt--;
 			}
-			if(idx == 0) {
-				throw new RemoveException("상품이 없습니다");
-			}
 		}
-		
-		
-//		int indexOfProdNo = 0; //  상품번호에 해당 상품의 위치
-//    	for(int i=0; i<totalCnt; i++) {
-//    		if(prodNo.equals(pArr[i].getProdNo())){
-//    			indexOfProdNo = i;
-//    			break;
-//    		}
-//    	}
-//    	if(indexOfProdNo == 0) {
-//    		throw new RemoveException("상품이 없습니다");
-//    	}
-//    	//상품위치부터 다음상품을 앞으로 땡겨넣기
-//    	for(int i=indexOfProdNo; i<totalCnt-1; i++) {
-//    		pArr[i] = pArr[i+1];
-//    	}
-//    	//상품번호에 해당 상품이 있으면 
-//    	if(indexOfProdNo > 0) { 
-//    		totalCnt--;
-//    	}
-    }    
+		if(idx==0) {
+			throw new RemoveException("상품이 없습니다");
+		}
+
+
+		//		int indexOfProdNo = 0; //  상품번호에 해당 상품의 위치
+		//    	for(int i=0; i<totalCnt; i++) {
+		//    		if(prodNo.equals(pArr[i].getProdNo())){
+		//    			indexOfProdNo = i;
+		//    			break;
+		//    		}
+		//    	}
+		//    	if(indexOfProdNo == 0) {
+		//    		throw new RemoveException("상품이 없습니다");
+		//    	}
+		//    	//상품위치부터 다음상품을 앞으로 땡겨넣기
+		//    	for(int i=indexOfProdNo; i<totalCnt-1; i++) {
+		//    		pArr[i] = pArr[i+1];
+		//    	}
+		//    	//상품번호에 해당 상품이 있으면 
+		//    	if(indexOfProdNo > 0) { 
+		//    		totalCnt--;
+		//    	}
+	}    
 
 	/**
 	 * 상품번호에 해당하는 상품을 저장소에서 찾아 반환한다
@@ -162,7 +162,7 @@ public class ProductRepository{
 			}
 		}
 	}
-	
+
 	/**
 	 * 모든 상품을 검색하여 반환한다
 	 * @return 상품들
