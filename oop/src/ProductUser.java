@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import com.my.product.dto.Product;
+import com.my.exception.AddException;
+import com.my.exception.FindException;
+import com.my.exception.RemoveException;
 import com.my.product.dao.ProductRepository;
 
 public class ProductUser{
@@ -8,9 +11,15 @@ public class ProductUser{
 	
 	public void findAll() {
 		System.out.println(">>전체상품검색<<");
-		Product[]resultArr = repository.selectAll();
-		for(int i=0; i<resultArr.length; i++){
-			resultArr[i].print();
+		Product[] resultArr;
+		try {
+			resultArr = repository.selectAll();
+			for(int i=0; i<resultArr.length; i++){
+				resultArr[i].print();
+			}
+		} catch (FindException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -19,12 +28,18 @@ public class ProductUser{
 		System.out.print("상품번호를 입력하세요:");
 		String noArg1 = sc.nextLine();//키보드로 입력받기
 		System.out.print(noArg1 + " ");
-		System.out.println(repository.selectByProdNo(noArg1) == null? "상품이 없습니다": "상품이 있습니다");
+//		System.out.println(repository.selectByProdNo(noArg1) == null? "상품이 없습니다": "상품이 있습니다");
 		//TODO
 		//상품이 존재하면 상품번호, 상품명, 가격을 출력하시오
-		Product p = repository.selectByProdNo(noArg1);
-		if(p != null) {
-			p.print();
+		Product p;
+		try {
+			p = repository.selectByProdNo(noArg1);
+			if(p != null) {
+				p.print();
+			}
+		} catch (FindException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	public void findByProdName() {
@@ -32,9 +47,14 @@ public class ProductUser{
 		System.out.print("단어를 입력하세요 단어를 포함한 상품명으로 검색합니다:");
 		String word = sc.nextLine();//키보드로 입력받기
 //		System.out.print(word + " ");
-		Product[] pArr = repository.selectByProdName(word);
-		for(Product p: pArr) {
-			p.print();
+		Product[] pArr;
+		try {
+			pArr = repository.selectByProdName(word);
+			for(Product p: pArr) {
+				p.print();
+			}
+		} catch (FindException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -50,7 +70,12 @@ public class ProductUser{
 		int prodPrice = Integer.parseInt(sc.nextLine());
 		
 		Product pArg = new Product(prodNo,prodName,prodPrice);
-		repository.insert(pArg);
+		
+		try {
+			repository.insert(pArg);
+		} catch (AddException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void modify() {
@@ -69,11 +94,15 @@ public class ProductUser{
 		repository.fix(chNo, prodNo, prodName, prodPrice);
 	}
 	
-	public void delete() {
+	public void erase() {
 		System.out.println(">>상품삭제<<");
 		System.out.print("상품번호를 입력하세요:");
 		String prodNo = sc.nextLine();
-		repository.erase(prodNo);
+		try {
+			repository.delete(prodNo);
+		} catch (RemoveException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -101,7 +130,7 @@ public class ProductUser{
 				user.modify();
 				
 			}else if(opt.equals("6")){
-				user.delete();
+				user.erase();
 			}else if(opt.equals("9")){
 			}else{
 				System.out.println("잘못입력하셨습니다");
