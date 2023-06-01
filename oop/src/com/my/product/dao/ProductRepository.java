@@ -1,5 +1,4 @@
 package com.my.product.dao;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +6,12 @@ import com.my.exception.AddException;
 import com.my.exception.FindException;
 import com.my.exception.RemoveException;
 import com.my.product.dto.Product;
+
 public class ProductRepository{
 	//	private Product[] pArr;
 	//	private int totalCnt = 0; // 저장소에 저장된 상품수
 	private List<Product> pList;
+	
 	public ProductRepository() {
 		pList = new ArrayList<>();
 	}
@@ -77,7 +78,6 @@ public class ProductRepository{
 	 * 	상품번호에 해당 상품이 없을 경우 예외가 발생한다
 	 */
 	public void delete(String prodNo) throws RemoveException{
-
 		int indexOfProdNo = 0; //  상품번호에 해당 상품의 위치
 		for(int i=0; i<pList.size(); i++) {
 			if(prodNo.equals(pList.get(i).getProdNo())){
