@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import com.my.product.dto.Product;
 import com.my.exception.AddException;
@@ -7,15 +9,16 @@ import com.my.product.dao.ProductRepository;
 
 public class ProductUser{
 	static Scanner sc = new Scanner(System.in);
-	ProductRepository repository = new ProductRepository(3); 
+	ProductRepository repository = new ProductRepository(); 
 	
 	public void findAll() {
 		System.out.println(">>전체상품검색<<");
-		Product[] resultArr;
+//		Product[] resultArr;
+		List<Product> resultList = new ArrayList<>();
 		try {
-			resultArr = repository.selectAll();
-			for(int i=0; i<resultArr.length; i++){
-				resultArr[i].print();
+			resultList = repository.selectAll();
+			for(int i=0; i<resultList.size(); i++){
+				resultList.get(i).print();
 			}
 		} catch (FindException e) {
 			// TODO Auto-generated catch block
@@ -47,10 +50,12 @@ public class ProductUser{
 		System.out.print("단어를 입력하세요 단어를 포함한 상품명으로 검색합니다:");
 		String word = sc.nextLine();//키보드로 입력받기
 //		System.out.print(word + " ");
-		Product[] pArr;
+//		Product[] pArr;
+		List<Product> pList = new ArrayList<>();
+		
 		try {
-			pArr = repository.selectByProdName(word);
-			for(Product p: pArr) {
+			pList = repository.selectByProdName(word);
+			for(Product p: pList) {
 				p.print();
 			}
 		} catch (FindException e) {
