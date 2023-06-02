@@ -1,5 +1,7 @@
 package com.my.product.dto; //Data Transfer Object
 
+import java.util.Objects;
+
 public class Product{
 	private String prodNo; //상품번호
 	private String prodName; //상품이름
@@ -39,5 +41,27 @@ public class Product{
 	public void print() {
     	System.out.println("상품번호 : "+ this.prodNo + ", 상품이름 : "+ this.prodName +", 상품가격 : " +  this.prodPrice);
     }
+	@Override
+	public int hashCode() {
+		return Objects.hash(prodNo);
+	}
+	@Override
+	/**
+	 * @param obj 상품객체
+	 * @return 현재객체의 상품번호와 obj객체의 상품번호가 같으면 true 반환
+	 * 		   그외는 false 반환
+	 *         ex) equals(new String()); 결과는 false
+	 *         ex) equals(null); 결과는 false
+	 */
+	public boolean equals(Object obj) {
+		if(obj instanceof Product == false) { //ClassCastException 방지
+			return false;
+		}
+		Product p = (Product) obj; // 다운캐스팅
+		if(this.prodNo == null || p == null) {
+			return false;
+		}
+		return this.prodNo.equals(p.prodNo);
+	}
 	
 }

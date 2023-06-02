@@ -24,15 +24,21 @@ public class ProductRepository{
 	 */
 	public void insert(Product p) throws AddException{
 		// 중복확인
-		for(int i=0; i<pList.size();  i++) {
-			Product p1 = pList.get(i); //저장소의 상품
-			String p1ProdNo = p1.getProdNo(); //저장소 상품의 상품번호
-			String pProdNo = p.getProdNo(); //저장하려는 상품의 상품번호
-			if(pProdNo.equals(p1ProdNo)) {
-				//if(p.getProdNo().equals(pArr[i].getProdNo())) {
-				//    			System.out.println("이미 존재하는 상품입니다");
-				//    			return;
-				throw new AddException("이미 존재하는 상품입니다"); //강제 예외 발생
+//		for(int i=0; i<pList.size();  i++) {
+//			Product p1 = pList.get(i); //저장소의 상품
+//			String p1ProdNo = p1.getProdNo(); //저장소 상품의 상품번호
+//			String pProdNo = p.getProdNo(); //저장하려는 상품의 상품번호
+//			if(pProdNo.equals(p1ProdNo)) {
+//				//if(p.getProdNo().equals(pArr[i].getProdNo())) {
+//				//    			System.out.println("이미 존재하는 상품입니다");
+//				//    			return;
+//				throw new AddException("이미 존재하는 상품입니다"); //강제 예외 발생
+//			}
+//		}
+		for(Product savedP : pList) {
+//			if(savedP.getProdNo().equals(p.getProdNo())) {
+			if(savedP.equals(p)) {
+				throw new AddException("이미 존재하는 상품입니다");
 			}
 		}
 		pList.add(p);
