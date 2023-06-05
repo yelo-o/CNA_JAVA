@@ -1,3 +1,4 @@
+package com.my.inheritance;
 //class 부모 {
 //	public void 부모메소드() {
 //		System.out.println("부모 메소드 호출");

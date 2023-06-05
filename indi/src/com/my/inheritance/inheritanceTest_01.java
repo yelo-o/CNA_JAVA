@@ -1,3 +1,4 @@
+package com.my.inheritance;
 //class 부모{
 //	int field1;
 //	void method1() {

@@ -1,3 +1,4 @@
+package com.my.inheritance;
 class Person {
 	String name;
 	Person(String name){

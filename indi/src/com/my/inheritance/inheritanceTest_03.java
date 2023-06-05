@@ -1,3 +1,4 @@
+package com.my.inheritance;
 //class 계산기{
 //	//부모 객체 메소드 선언
 //	public double 원면적계산하기(double r){

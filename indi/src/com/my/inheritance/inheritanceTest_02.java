@@ -1,3 +1,4 @@
+package com.my.inheritance;
 //class 부모{
 //	String 국적 = "대한민국";
 //	int 재산 = 10000;

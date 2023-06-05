@@ -1,3 +1,4 @@
+package com.my.inheritance;
 abstract class 동물 {
 	abstract void sound();
 }

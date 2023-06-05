@@ -1,3 +1,4 @@
+package com.my.inheritance;
 //class 타이어 {
 //	void roll() {
 //		System.out.println("타이어가 회전합니다");
