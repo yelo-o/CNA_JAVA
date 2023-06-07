@@ -14,19 +14,26 @@ public class KeyboardTest {
 		 * 필터스트림 : InputStreamReader
 		 */
 		InputStream is = System.in;
-//		InputStreamReader ir = null;
+		InputStreamReader ir = null;
 		Scanner sc = null;
-//		try {
-//			int readValue = is.read();
-//			ir = new InputStreamReader(is);
+		try {
+			int readValue = is.read();
+			int readValue2 = is.read();
+			int readValue3 = is.read();
+			int readValue4 = is.read();
+			int readValue5 = is.read();
+			ir = new InputStreamReader(is);
 //			int readValue = ir.read();
-//			System.out.println("입력된 값 : " + readValue + ", 문자값 : " + (char)readValue);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-			sc = new Scanner(is);
-			String readLine = sc.nextLine();
-			System.out.println("입력된 값 : " + readLine);
+			System.out.println("입력된 값 : " + readValue + readValue2 + readValue3 + readValue4 + readValue5);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//			sc = new Scanner(is);
+////			String readLine = sc.nextLine();
+////			System.out.println("입력된 값 : " + readLine);
+//			String read = sc.next();
+//			int i = sc.nextInt();
+//			System.out.println();
+			
 	}
-
 }
