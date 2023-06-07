@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class KeyboardTest {
 
@@ -13,15 +14,19 @@ public class KeyboardTest {
 		 * 필터스트림 : InputStreamReader
 		 */
 		InputStream is = System.in;
-		InputStreamReader ir = null;
-		try {
+//		InputStreamReader ir = null;
+		Scanner sc = null;
+//		try {
 //			int readValue = is.read();
-			ir = new InputStreamReader(is);
-			int readValue = ir.read();
-			System.out.println("입력된 값 : " + readValue + ", 문자값 : " + (char)readValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//			ir = new InputStreamReader(is);
+//			int readValue = ir.read();
+//			System.out.println("입력된 값 : " + readValue + ", 문자값 : " + (char)readValue);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+			sc = new Scanner(is);
+			String readLine = sc.nextLine();
+			System.out.println("입력된 값 : " + readLine);
 	}
 
 }
