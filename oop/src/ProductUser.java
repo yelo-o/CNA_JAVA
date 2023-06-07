@@ -21,7 +21,6 @@ public class ProductUser{
 				resultList.get(i).print();
 			}
 		} catch (FindException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -41,7 +40,6 @@ public class ProductUser{
 				p.print();
 			}
 		} catch (FindException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,11 +1,4 @@
 package com.my.product.dao;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +7,13 @@ import com.my.exception.FindException;
 import com.my.exception.RemoveException;
 import com.my.product.dto.Product;
 
-public class ProductRepository{
-	private String fileName;
-	public ProductRepository() {
-		fileName = "..\\products.dat";
+public class ProductRepository3{
+	//	private Product[] pArr;
+	//	private int totalCnt = 0; // 저장소에 저장된 상품수
+	private List<Product> pList;
+	
+	public ProductRepository3() {
+		pList = new ArrayList<>();
 	}
 
 	/**
@@ -27,61 +23,25 @@ public class ProductRepository{
 	 * 	상품번호가 존재할 경우 "이미 존재하는 상품입니다" 메시지를 갖는 예외 발생
 	 */
 	public void insert(Product p) throws AddException{
-		/*
-		 * 상품중복확인
-		 * products.dat 파일을 자료형별로 읽기
-		 * 자원 : products.dat 파일
-		 * 노드스트림 : FileInputStream
-		 * 필터스트림 : DataInputStream
-		 */
-		DataInputStream dis = null;
-		try {
-			dis = new DataInputStream(new FileInputStream(fileName));
-			String prodNo = dis.readUTF();
-			String prodName = dis.readUTF();
-			int prodPrice = dis.readInt();
-			if(prodNo.equals(p.getProdNo())) {
+		// 중복확인
+//		for(int i=0; i<pList.size();  i++) {
+//			Product p1 = pList.get(i); //저장소의 상품
+//			String p1ProdNo = p1.getProdNo(); //저장소 상품의 상품번호
+//			String pProdNo = p.getProdNo(); //저장하려는 상품의 상품번호
+//			if(pProdNo.equals(p1ProdNo)) {
+//				//if(p.getProdNo().equals(pArr[i].getProdNo())) {
+//				//    			System.out.println("이미 존재하는 상품입니다");
+//				//    			return;
+//				throw new AddException("이미 존재하는 상품입니다"); //강제 예외 발생
+//			}
+//		}
+		for(Product savedP : pList) {
+//			if(savedP.getProdNo().equals(p.getProdNo())) {
+			if(savedP.equals(p)) {
 				throw new AddException("이미 존재하는 상품입니다");
 			}
-		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally {
-			if(dis != null) {
-				try {
-					dis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
-		/*
-		 * products.dat파일에 상품정보(상품번호, 상품명, 가격)를 자료형별로 쓰기
-		 * 목적지 : product.dat 파일
-		 * 노드스트림 : FileOutputStream
-		 * 필터스트림 : DataOutputStream
-		 */
-		DataOutputStream dos = null;
-		try {
-			dos = new DataOutputStream(new FileOutputStream(fileName, true));
-			dos.writeUTF(p.getProdNo());
-			dos.writeUTF(p.getProdName());
-			dos.writeInt(p.getProdPrice());
-		} catch (FileNotFoundException e) { //데이터 쓰기에서 FileNotFoundException 이 발생하는 경우? -> 저장소 이름이 다른 경우 D드라이브, E드라이브 등..
-			
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally {
-			if(dos != null) {
-				try {
-					dos.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		pList.add(p);
 	}
 	
 	/**
@@ -93,9 +53,8 @@ public class ProductRepository{
 	 */
 	public Product selectByProdNo(String no) throws FindException{
 		//상품번호에 해당하는 상품을 저장소에서 찾아 상품을 반환한다
-		
-		for(int i=0 ; i < selectAll().size() ; i++){
-			Product p = selectAll().get(i);
+		for(int i=0; i<pList.size(); i++){
+			Product p = pList.get(i);
 			if(p.getProdNo().equals(no)){
 				return p;
 			}
@@ -107,34 +66,13 @@ public class ProductRepository{
 	 * 모든 상품을 검색하여 반환한다
 	 * @return 상품들
 	 * @throws FindException
+	 * 	
 	 */
 	public List<Product> selectAll() throws FindException{
-		Product p = new Product();
-		List<Product> pListAll = new ArrayList<>();
-		
-		DataInputStream dis = null;
-		try {
-			dis = new DataInputStream(new FileInputStream(fileName));
-			while(true) { //파일을 읽어서 Product에 넣음
-				String prodNo = dis.readUTF();
-				String prodName = dis.readUTF();
-				int prodPrice = dis.readInt();
-				pListAll.add(p); //파일로부터 읽은 번호,이름,가격을 pListAll이라는 리스트에 넣음 
-				System.out.println("상품번호 : " + prodNo + " , 상품이름 : " + prodName + " , 상품가격 : " + prodPrice);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (EOFException e) {
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if( dis != null) {
-				try {
-					dis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+//		Product[] all = new Product[pList.size()];
+		List<Product> pListAll = new ArrayList<Product>();
+		for(int i=0; i<pList.size(); i++){
+			pListAll.add(pList.get(i));
 		}
 		return pListAll;
 	}
