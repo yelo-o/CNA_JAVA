@@ -1,11 +1,12 @@
 package com.my.product.dto; //Data Transfer Object
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Product{
+public class Product implements Serializable {
 	private String prodNo; //상품번호
 	private String prodName; //상품이름
-	private int prodPrice; //상품가격
+	transient private int prodPrice; //상품가격 //transient : 직렬화제외
 	
 	public Product() { // 디폴트 생성자 생성 <-자바빈의 조건을 충족하기 위해
 		
@@ -62,6 +63,10 @@ public class Product{
 			return false;
 		}
 		return this.prodNo.equals(p.prodNo);
+	}
+	@Override
+	public String toString() {
+		return "Product [prodNo=" + prodNo + ", prodName=" + prodName + ", prodPrice=" + prodPrice + "]";
 	}
 	
 }
