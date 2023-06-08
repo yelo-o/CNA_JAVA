@@ -16,6 +16,8 @@ import com.my.product.dto.Product;
 
 public class ProductRepository{
 	private String fileName;
+
+
 	public ProductRepository() {
 		fileName = "..\\products.dat";
 	}
@@ -44,7 +46,8 @@ public class ProductRepository{
 				throw new AddException("이미 존재하는 상품입니다");
 			}
 		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
+		} catch(EOFException e) {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -70,6 +73,7 @@ public class ProductRepository{
 			dos.writeInt(p.getProdPrice());
 		} catch (FileNotFoundException e) { //데이터 쓰기에서 FileNotFoundException 이 발생하는 경우? -> 저장소 이름이 다른 경우 D드라이브, E드라이브 등..
 			e.printStackTrace();
+		} catch(EOFException e) {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally {
@@ -82,7 +86,7 @@ public class ProductRepository{
 			}
 		}
 	}
-	
+
 	/**
 	 * 상품번호에 해당하는 상품을 저장소에서 찾아 반환한다
 	 * @param no 상품번호
@@ -109,7 +113,7 @@ public class ProductRepository{
 		}
 		throw new FindException("상품이 없습니다"); //강제 예외 발생
 	}
-	
+
 	/**
 	 * 모든 상품을 검색하여 반환한다
 	 * @return 상품들
@@ -149,18 +153,55 @@ public class ProductRepository{
 	 * @throws com.my.exception.RemoveException
 	 * 	상품번호에 해당 상품이 없을 경우 예외가 발생한다
 	 */
-	public void delete(String prodNo) throws RemoveException{
-		int indexOfProdNo = 0; //  상품번호에 해당 상품의 위치
-		for(int i=0; i<pList.size(); i++) {
-			if(prodNo.equals(pList.get(i).getProdNo())){
-				indexOfProdNo = i;
-				break;
+	public void delete(String deleteNo) throws RemoveException{
+		List<Product> pList = new ArrayList<>();
+		DataInputStream dis = null;
+		DataOutputStream dos = null;
+		try {
+			dis = new DataInputStream(new FileInputStream(fileName));
+			while(true) {
+				String prodNo = dis.readUTF();
+				String prodName = dis.readUTF();
+				int prodPrice = dis.readInt();
+				if( prodNo.equals(deleteNo) ) {
+					continue;
+				}
+				pList.add(new Product(prodNo, prodName, prodPrice));
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch(EOFException e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(dis != null) {
+				try {
+					dis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		if(indexOfProdNo == 0) {
-			throw new RemoveException("상품이 없습니다");
-		}else if(indexOfProdNo > 0) {
-			pList.remove(indexOfProdNo);
+		try {
+			dos = new DataOutputStream(new FileOutputStream(fileName, false));
+			for(Product p : pList) {
+				dos.writeUTF(p.getProdNo());
+				dos.writeUTF(p.getProdName());
+				dos.writeInt(p.getProdPrice());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (EOFException e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(dos != null) {
+				try {
+					dos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}    
 
@@ -172,8 +213,8 @@ public class ProductRepository{
 	 * @throws FindException
 	 */
 	public List<Product> selectByProdName(String word) throws FindException{
-//		Product[] all;
-		List<Product> pListAll = new ArrayList<>();
+		//		Product[] all;
+		List<Product> pList = new ArrayList<>();
 		int cnt = 0; // 단어를 포함한 상품수
 		for(int i=0;i<pList.size();i++) {
 			Product p = pList.get(i);
@@ -182,7 +223,7 @@ public class ProductRepository{
 			}
 		}
 
-//		pListAll = new Product[];
+		//		pListAll = new Product[];
 		int index = 0;
 		for(int i=0;i<pList.size();i++) {
 			Product p = pList.get(i);
