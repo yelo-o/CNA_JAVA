@@ -47,7 +47,7 @@ public class ProductRepository{
 //			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if(dis != null) {
 				try {
 					dis.close();
@@ -109,9 +109,7 @@ public class ProductRepository{
 	 * @throws FindException
 	 */
 	public List<Product> selectAll() throws FindException{
-		Product p = new Product();
 		List<Product> pListAll = new ArrayList<>();
-		
 		DataInputStream dis = null;
 		try {
 			dis = new DataInputStream(new FileInputStream(fileName));
@@ -119,8 +117,7 @@ public class ProductRepository{
 				String prodNo = dis.readUTF();
 				String prodName = dis.readUTF();
 				int prodPrice = dis.readInt();
-				pListAll.add(p); //파일로부터 읽은 번호,이름,가격을 pListAll이라는 리스트에 넣음 
-				System.out.println("상품번호 : " + prodNo + " , 상품이름 : " + prodName + " , 상품가격 : " + prodPrice);
+				pListAll.add(new Product(prodNo,prodName,prodPrice)); //파일로부터 읽은 번호,이름,가격을 pListAll이라는 리스트에 넣음 
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

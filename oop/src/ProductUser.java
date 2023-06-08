@@ -13,7 +13,6 @@ public class ProductUser{
 	
 	public void findAll() {
 		System.out.println(">>전체상품검색<<");
-//		Product[] resultArr;
 		List<Product> resultList = new ArrayList<>();
 		try {
 			resultList = repository.selectAll();
