@@ -3,7 +3,7 @@ import java.util.HashSet;
 public class Main {
 	public static void main(String[] args) {
 		// Student를 저장하는 HashSet 생성
-		HashSet<Student> hashSet = new HashSet<Student>();
+		HashSet<Student> hashSet = new HashSet<>();
 
 		// Student 저장
 		hashSet.add(new Student("1"));
@@ -18,7 +18,7 @@ public class Main {
 class Student {
 	private String studentNum;
 
-	public Student(String StudentNum) {
+	public Student(String studentNum) {
 		this.studentNum = studentNum;
 	}
 
