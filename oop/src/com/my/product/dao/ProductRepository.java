@@ -69,7 +69,6 @@ public class ProductRepository{
 			dos.writeUTF(p.getProdName());
 			dos.writeInt(p.getProdPrice());
 		} catch (FileNotFoundException e) { //데이터 쓰기에서 FileNotFoundException 이 발생하는 경우? -> 저장소 이름이 다른 경우 D드라이브, E드라이브 등..
-			
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -92,13 +91,21 @@ public class ProductRepository{
 	 * 	번호에 해당하는 상품이 없으면 "상품이 없습니다" 메시지를 갖는 예외 발생한다
 	 */
 	public Product selectByProdNo(String no) throws FindException{
-		//상품번호에 해당하는 상품을 저장소에서 찾아 상품을 반환한다
-		
-		for(int i=0 ; i < selectAll().size() ; i++){
-			Product p = selectAll().get(i);
-			if(p.getProdNo().equals(no)){
-				return p;
+		DataInputStream dis = null;
+		try {
+			dis = new DataInputStream(new FileInputStream(fileName));
+			while(true) {
+				String prodNo = dis.readUTF();
+				String prodName = dis.readUTF();
+				int prodPrice = dis.readInt();
+				if( prodNo.equals(no) ) {
+					return new Product(prodNo,prodName,prodPrice);
+				}
 			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		throw new FindException("상품이 없습니다"); //강제 예외 발생
 	}
