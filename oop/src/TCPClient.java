@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class TCPClient {
 
 	public static void main(String[] args) {
-		String serverIP = "192.168.0.40";
-//		String serverIP = "127.0.0.1";
+//		String serverIP = "192.168.0.40";
+		String serverIP = "127.0.0.1";
 		int serverPort = 5432;
 		Socket s = null;
 		OutputStream os = null;
@@ -29,15 +29,12 @@ public class TCPClient {
 //			os.write(65);
 			
 			//키보드로 quit 문자열까지 서버로 send 반복한다
-			while(true) {
-				String sendMsg  = sc.nextLine();
-				if(sendMsg.equals("quit")) {
-					dos.writeUTF(sendMsg);
-					break;
-				}else {
-					dos.writeUTF(sendMsg);
-				}
-			}
+			String sendMsg;
+			do {
+				sendMsg  = sc.nextLine();
+				dos.writeUTF(sendMsg);
+			}while(!sendMsg.equals("quit"));
+			
 		} catch (ConnectException e) {
 			System.out.println("서버를 찾지못했습니다");
 		} catch (UnknownHostException e) {

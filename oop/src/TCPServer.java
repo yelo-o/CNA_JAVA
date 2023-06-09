@@ -5,6 +5,7 @@ import java.net.BindException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class TCPServer {
 
@@ -26,19 +27,25 @@ public class TCPServer {
 			//			int readByteSize = is.read(bArr);
 			//			String receiveMsg = new String(bArr, 0, readByteSize);
 			dis = new DataInputStream(is);
+			String receiveMsg;
+//			do {
+//				receiveMsg = dis.readUTF();
+//				System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
+//			}while(!receiveMsg.equals("quit"));
 			while(true) {
-				String receiveMsg = dis.readUTF();
+				receiveMsg = dis.readUTF();
 				if(receiveMsg.equals("quit")) {
-					System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
 					break;
-				}else {
-					System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
 				}
+				System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
 			}
+			
 		} catch (IllegalArgumentException e) { //런타임에러이기 때문에 컴파일러가 체크못함
 			System.out.println(port + " 포트가 틀렸어요");
 		} catch (BindException e) {
 			System.out.println(port + " 포트는 이미 사용중입니다");
+		} catch (SocketException e) {
+			System.out.println("클라이언트와의 연결이 해제되었습니다");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
