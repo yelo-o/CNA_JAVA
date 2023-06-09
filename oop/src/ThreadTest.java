@@ -1,16 +1,15 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 class Fifth implements Runnable {
-
+	int max = 100;
 	@Override
 	public void run() {
-		for(int i=0;i<10;i++) {
-			System.out.println("CAPTON PLAY");
+		for(int i=0;i<max;i++) {
+			System.out.println(i + " : CAPTON PLAY");
 		}
 	}
 }
 class Fourth implements Runnable {
-
 	@Override
 	public void run() {
 		for(int i=0;i<10;i++) {
@@ -19,7 +18,6 @@ class Fourth implements Runnable {
 	}
 }
 class Third implements Runnable {
-
 	@Override
 	public void run() {
 		for(int i=0;i<10;i++) {
@@ -77,7 +75,17 @@ public class ThreadTest {
 
 		new Thread(new Third()).start();
 		new Thread(new Fourth()).start();
-		new Thread(new Fifth()).start();
+		Fifth fifth = new Fifth();
+		Thread t2 = new Thread(fifth);
+		t2.start();
+//		t2.stop(); //deprecated된 강제종료 메소드
+		try {
+			Thread.sleep(10); //메인스레드 일시중지
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		fifth.max = 0;
+		
 		new Thread(new Runnable() {
 			public void run() {
 				for(int i=0;i<10;i++) {
