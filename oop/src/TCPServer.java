@@ -21,13 +21,20 @@ public class TCPServer {
 			String clientAddress = clientIP.getHostAddress();
 			System.out.println("클라이언트 "+ clientAddress + " 가 접속했습니다");
 			is = s.getInputStream();
-//			System.out.println((char)is.read());
-//			byte[] bArr = new byte[100];
-//			int readByteSize = is.read(bArr);
-//			String receiveMsg = new String(bArr, 0, readByteSize);
+			//			System.out.println((char)is.read());
+			//			byte[] bArr = new byte[100];
+			//			int readByteSize = is.read(bArr);
+			//			String receiveMsg = new String(bArr, 0, readByteSize);
 			dis = new DataInputStream(is);
-			String receiveMsg = dis.readUTF();
-			System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
+			while(true) {
+				String receiveMsg = dis.readUTF();
+				if(receiveMsg.equals("quit")) {
+					System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
+					break;
+				}else {
+					System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
+				}
+			}
 		} catch (IllegalArgumentException e) { //런타임에러이기 때문에 컴파일러가 체크못함
 			System.out.println(port + " 포트가 틀렸어요");
 		} catch (BindException e) {

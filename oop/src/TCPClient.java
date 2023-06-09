@@ -29,9 +29,15 @@ public class TCPClient {
 //			os.write(65);
 			
 			//키보드로 quit 문자열때까지 서버로 send 반복한다
-			String sendMsg  = sc.nextLine();
-			dos.writeUTF(sendMsg);
-			
+			while(true) {
+				String sendMsg  = sc.nextLine();
+				if(sendMsg.equals("quit")) {
+					dos.writeUTF(sendMsg);
+					break;
+				}else {
+					dos.writeUTF(sendMsg);
+				}
+			}
 		} catch (ConnectException e) {
 			System.out.println("서버를 찾지못했습니다");
 		} catch (UnknownHostException e) {
