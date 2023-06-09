@@ -1,3 +1,4 @@
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.BindException;
@@ -11,6 +12,7 @@ public class TCPServer {
 		ServerSocket ss = null;
 		int port = 5433; //1521;//65536;
 		InputStream is = null;
+		DataInputStream dis = null;
 		try {
 			ss = new ServerSocket(port); //포트 열기
 			Socket s = null;
@@ -20,9 +22,11 @@ public class TCPServer {
 			System.out.println("클라이언트 "+ clientAddress + " 가 접속했습니다");
 			is = s.getInputStream();
 //			System.out.println((char)is.read());
-			byte[] bArr = new byte[100];
-			int readByteSize = is.read(bArr);
-			String receiveMsg = new String(bArr, 0, readByteSize);
+//			byte[] bArr = new byte[100];
+//			int readByteSize = is.read(bArr);
+//			String receiveMsg = new String(bArr, 0, readByteSize);
+			dis = new DataInputStream(is);
+			String receiveMsg = dis.readUTF();
 			System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
 		} catch (IllegalArgumentException e) { //런타임에러이기 때문에 컴파일러가 체크못함
 			System.out.println(port + " 포트가 틀렸어요");
