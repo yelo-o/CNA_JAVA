@@ -9,9 +9,9 @@ import java.util.Scanner;
 public class TCPClient {
 
 	public static void main(String[] args) {
-//		String serverIP = "192.168.0.40";
-		String serverIP = "127.0.0.1";
-		int serverPort = 5433;
+		String serverIP = "192.168.0.40";
+//		String serverIP = "127.0.0.1";
+		int serverPort = 5432;
 		Socket s = null;
 		OutputStream os = null;
 		DataOutputStream dos = null;
@@ -28,7 +28,7 @@ public class TCPClient {
 //			os.writeUTF(sendMsg);
 //			os.write(65);
 			
-			//키보드로 quit 문자열때까지 서버로 send 반복한다
+			//키보드로 quit 문자열까지 서버로 send 반복한다
 			while(true) {
 				String sendMsg  = sc.nextLine();
 				if(sendMsg.equals("quit")) {

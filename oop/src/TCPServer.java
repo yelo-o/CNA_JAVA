@@ -10,7 +10,7 @@ public class TCPServer {
 
 	public static void main(String[] args) {
 		ServerSocket ss = null;
-		int port = 5433; //1521;//65536;
+		int port = 5432; //1521;//65536;
 		InputStream is = null;
 		DataInputStream dis = null;
 		try {
