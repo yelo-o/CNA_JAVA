@@ -204,8 +204,6 @@ public class ProductRepository{
 			}
 		}
 	}    
-
-
 	/**
 	 * 단어를 포함한 이름을 갖는 상품들을 반환한다
 	 * @param word 단어
@@ -215,7 +213,26 @@ public class ProductRepository{
 	public List<Product> selectByProdName(String word) throws FindException{
 		//		Product[] all;
 		List<Product> pList = new ArrayList<>();
+		DataInputStream dis = null;
 		int cnt = 0; // 단어를 포함한 상품수
+		try {
+			dis = new DataInputStream(new FileInputStream(fileName));
+			while(true) {
+				String prodNo = dis.readUTF();
+				String prodName = dis.readUTF();
+				int prodPrice = dis.readInt();
+				if(prodName.indexOf(word) > -1) {
+					continue;
+				}
+				
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		for(int i=0;i<pList.size();i++) {
 			Product p = pList.get(i);
 			if (p.getProdName().indexOf(word) > -1) {
@@ -223,16 +240,15 @@ public class ProductRepository{
 			}
 		}
 
-		//		pListAll = new Product[];
 		int index = 0;
 		for(int i=0;i<pList.size();i++) {
 			Product p = pList.get(i);
 			if(p.getProdName().indexOf(word) > -1) {
-				pListAll.add(p);
+				pList.add(p);
 				index++;
 			}
 		}
-		return pListAll;
+		return pList;
 	}
 
 	/**
@@ -243,13 +259,13 @@ public class ProductRepository{
 	 * @param prodPrice
 	 */
 	public void fix(String chNo, String prodNo, String prodName, int prodPrice) {
-		for(int i=0; i<pList.size();i++) {
-			if(pList.get(i).getProdNo().equals(chNo)){
-				pList.get(i).setProdNo(prodNo);
-				pList.get(i).setProdName(prodName);
-				pList.get(i).setProdPrice(prodPrice);
-			}
-		}
+//		for(int i=0; i<pList.size();i++) {
+//			if(pList.get(i).getProdNo().equals(chNo)){
+//				pList.get(i).setProdNo(prodNo);
+//				pList.get(i).setProdName(prodName);
+//				pList.get(i).setProdPrice(prodPrice);
+//			}
+//		}
 	}
 
 } 
