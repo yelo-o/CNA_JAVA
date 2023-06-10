@@ -4,7 +4,7 @@ import java.awt.Toolkit;
 
 public class BeepPrintExample {
 	public static void main(String[] args) {
-		Thread thread = new Thread(new Runnable() {
+		Thread thread = new Thread() {
 			@Override
 			public void run() {
 				Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -17,12 +17,9 @@ public class BeepPrintExample {
 					}
 				}
 			}
-		});
-		
+		};
 		thread.start();
 		// make Toolkit instance
-
-
 		for(int i=0; i<5; i++) {
 			System.out.println("Thing");
 			try {
@@ -30,7 +27,6 @@ public class BeepPrintExample {
 			} catch(Exception e) {
 			}
 		}
-
 	}
 
 }
