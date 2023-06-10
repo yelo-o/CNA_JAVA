@@ -4,7 +4,9 @@ import java.awt.Toolkit;
 
 public class BeepPrintExample {
 	public static void main(String[] args) {
+		// make Toolkit instance
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		
 		for(int i=0; i<5; i++) {
 			toolkit.beep();
 			try {
@@ -12,7 +14,7 @@ public class BeepPrintExample {
 			} catch(Exception e) {
 			}
 		}
-		
+
 		for(int i=0; i<5; i++) {
 			System.out.println("Thing");
 			try {
