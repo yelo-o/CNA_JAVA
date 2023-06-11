@@ -1,6 +1,6 @@
 package ch14;
 
-class PrintThread extends Thread {
+class PrintThread0 extends Thread {
 	private boolean stop;
 	
 	public void setStop(boolean stop) {
@@ -20,7 +20,7 @@ class PrintThread extends Thread {
 public class SafeStopExample {
 
 	public static void main(String[] args) {
-		PrintThread printThread = new PrintThread(); 
+		PrintThread0 printThread = new PrintThread0(); 
 		printThread.start();
 		
 		try {
