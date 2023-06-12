@@ -32,11 +32,10 @@ public class TCPClient {
 			is = s.getInputStream();
 			dis = new DataInputStream(is);
 			String sendMsg;
-			String recieveMsg;
 			do {
 				sendMsg  = sc.nextLine();
 				dos.writeUTF(sendMsg);
-				recieveMsg = dis.readUTF();
+				String recieveMsg = dis.readUTF();
 				System.out.println("from 서버 : " + recieveMsg);
 
 			}while(!sendMsg.equals("quit"));
