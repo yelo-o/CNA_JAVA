@@ -13,7 +13,7 @@ class SumThread extends Thread {
 	
 	@Override
 	public void run() {
-		for(int i=1; i<=100; i++) {
+		for(int i=1; i<=3; i++) {
 			sum += i;
 		}
 	}
@@ -23,10 +23,16 @@ public class JoinExample {
 	public static void main(String[] args) {
 		SumThread sumThread = new SumThread();
 		sumThread.start();
-		try {
-			sumThread.join();	
-		} catch (InterruptedException e) {
-		}
+//		try {
+//			sumThread.join();	
+//		} catch (InterruptedException e) {
+//		}
+		System.out.println("1~100 합: " + sumThread.getSum());
+		System.out.println("1~100 합: " + sumThread.getSum());
+		System.out.println("1~100 합: " + sumThread.getSum());
+		System.out.println("1~100 합: " + sumThread.getSum());
+		System.out.println("1~100 합: " + sumThread.getSum());
+		System.out.println("1~100 합: " + sumThread.getSum());
 		System.out.println("1~100 합: " + sumThread.getSum());
 
 	}

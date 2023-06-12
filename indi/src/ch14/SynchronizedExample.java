@@ -16,12 +16,13 @@ class Calculator {
 	}
 	
 	public void setMemory2 (int memory) {
-		synchronized(this) {
+		System.out.println("확인");
+//		synchronized(this) {
 			this.memory = memory;
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-			}
+//			}
 			System.out.println(Thread.currentThread().getName() + " : " + this.memory);
 		}
 	}
@@ -68,10 +69,11 @@ public class SynchronizedExample {
 		User1Thread user1Thread = new User1Thread();
 		user1Thread.setCalculator(calculator);
 		user1Thread.start();
-
+		
 		User2Thread user2Thread = new User2Thread();
 		user2Thread.setCalculator(calculator);
 		user2Thread.start();
+
 	}
 
 }

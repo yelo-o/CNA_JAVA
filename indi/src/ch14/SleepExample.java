@@ -11,11 +11,12 @@ public class SleepExample {
 			toolkit.beep();
 			try {
 				Thread.sleep(3000);
-			} catch(InterruptedException e) {
-				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
+
 		}
-			
+
 
 	}
 

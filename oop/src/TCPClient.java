@@ -13,8 +13,9 @@ import java.util.Scanner;
 public class TCPClient {
 
 	public static void main(String[] args) {
-		//		String serverIP = "192.168.0.40";
-		String serverIP = "127.0.0.1";
+		String serverIP = "192.168.0.40";
+//		String serverIP = "192.168.0.116";
+//		String serverIP = "127.0.0.1";
 		int serverPort = 5432;
 		Socket s = null;
 		OutputStream os = null;
@@ -28,7 +29,7 @@ public class TCPClient {
 			s = new Socket(serverIP, serverPort); //직접 소켓 객체 생성
 			os = s.getOutputStream();
 			dos = new DataOutputStream(os);
-			
+
 			is = s.getInputStream();
 			dis = new DataInputStream(is);
 			String sendMsg;
@@ -45,7 +46,7 @@ public class TCPClient {
 		} catch (SocketException e) {
 			System.out.println("서버와 연결이 해제되었습니다");
 		} catch (EOFException e) {
-			
+
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
