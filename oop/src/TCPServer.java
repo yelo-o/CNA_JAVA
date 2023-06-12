@@ -1,11 +1,14 @@
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.BindException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Scanner;
 
 public class TCPServer {
 
@@ -14,6 +17,9 @@ public class TCPServer {
 		int port = 5432; //1521;//65536;
 		InputStream is = null;
 		DataInputStream dis = null;
+		OutputStream os = null;
+		DataOutputStream dos = null;
+		Scanner sc = new Scanner(System.in);
 		try {
 			ss = new ServerSocket(port); //포트 열기
 			Socket s = null;
@@ -26,6 +32,9 @@ public class TCPServer {
 					System.out.println("클라이언트 "+ clientAddress + " 가 접속했습니다");
 					is = s.getInputStream();
 					dis = new DataInputStream(is);
+					
+					os = s.getOutputStream();
+					dos = new DataOutputStream(os);
 					String receiveMsg;
 					while(true) {
 						receiveMsg = dis.readUTF();
@@ -33,6 +42,8 @@ public class TCPServer {
 							break;
 						}
 						System.out.println("클라이언트 " + clientAddress + ">" + receiveMsg);
+						String sendMsg = receiveMsg;
+						dos.writeUTF(sendMsg);
 					}
 				} catch (SocketException e) {
 					System.out.println("클라이언트와의 연결이 해제되었습니다");
@@ -43,7 +54,6 @@ public class TCPServer {
 						try {
 							s.close();
 						} catch (IOException e) {
-							
 						}
 					}
 				}
@@ -57,5 +67,4 @@ public class TCPServer {
 			}
 			System.out.println("TCPSERVER END");
 		}
-
 	}
