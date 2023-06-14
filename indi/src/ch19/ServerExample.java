@@ -44,7 +44,8 @@ public class ServerExample {
                   Socket socket = serverSocket.accept();
 
                   //연결된 클라이언트 정보 얻기
-                  InetSocketAddress isa = (InetSocketAddress)socket.getRemoteSocketAddress();
+                  InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress();
+                  
                   System.out.println("[서버]"+isa.getHostName()+"의 연결 요청을 수락함");
 
                   //연결끊기
@@ -52,7 +53,7 @@ public class ServerExample {
                   System.out.println("[서버]"+isa.getHostName()+"의 연결을 끊음");
                }
             }catch(IOException e) {
-               System.out.println("[서버]"+e.getMessage());
+               System.out.println("Socket Closed");
             }
          }
       };
