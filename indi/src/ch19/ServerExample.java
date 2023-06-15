@@ -53,7 +53,8 @@ public class ServerExample {
                   System.out.println("[서버]"+isa.getHostName()+"의 연결을 끊음");
                }
             }catch(IOException e) {
-               System.out.println("Socket Closed");
+//               System.out.println("Socket Closed");
+               System.out.println("[서버] " + e.getMessage());
             }
          }
       };
