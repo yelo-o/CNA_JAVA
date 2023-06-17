@@ -7,14 +7,19 @@ public class Review {
 	private String reviewContent;
 	private String reviewDate;
 	
+	public Review() {
+		
+	}
+	
 	public Review(int shopNo, int reviewNo, String writer, String reviewContent, String reviewDate) {
-		super();
+		//super();
 		this.shopNo = shopNo;
 		this.reviewNo = reviewNo;
 		this.writer = writer;
 		this.reviewContent = reviewContent;
 		this.reviewDate = reviewDate;
 	}
+	
 	public int getShopNo() {
 		return shopNo;
 	}
@@ -45,7 +50,4 @@ public class Review {
 	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
-	
-	
-
 }

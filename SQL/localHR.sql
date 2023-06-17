@@ -571,6 +571,7 @@ MODIFY prod_price DEFAULT 0;
 INSERT INTO product(prod_no, prod_name) VALUES ('C0003', '핫초코' );
 INSERT INTO product(prod_no, prod_name) VALUES ('C0004', '아이스딸기아사이' );
 
+--prod_name 의 크기 변경
 ALTER TABLE product
 MODIFY prod_name VARCHAR2(100);
 
@@ -600,5 +601,6 @@ INSERT INTO product(prod_no, prod_name) VALUES ('D0001', '라임블렌디드'); --OK
 INSERT INTO product(prod_no, prod_name) VALUES ('D0002', null);
 DELETE product WHERE prod_name IS NULL; --prod_no가 (null)인 상품 삭제
 
+--NOT NULL 제약 조건 추가
 ALTER TABLE product
 MODIFY prod_name CONSTRAINT prod_name_nn NOT NULL;
