@@ -1,14 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 
 import com.mango.dao.ReviewController;
 import com.mango.dto.Review;
 import com.mango.exception.AddException;
 import com.mango.exception.FindException;
+import com.mango.exception.RemoveException;
 
 public class MangoTest {
 	static Scanner sc = new Scanner(System.in);
@@ -34,18 +34,25 @@ public class MangoTest {
 	//3. 리뷰 작성
 	public void writeReview() {
 		System.out.println("[리뷰 작성]");
+		//리뷰 내용
 		System.out.println("리뷰 내용을 입력하세요");
 		String reviewContent = sc.nextLine();
-		
+		//별점
 		System.out.println("별점을 입력하세요 (1 ~ 5점)");
 		int rating = Integer.parseInt(sc.nextLine());
 		if(rating < 1 || rating > 5) {
 			System.out.println("다시 입력하세요");
 		}
+		//날짜, 시간
 		LocalDateTime now = LocalDateTime.now();
 		String reviewDateTime = now.format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss"));
 		
+		//Review 객체 생성
 		Review r = new Review(reviewContent, rating, reviewDateTime);
+//		int no = r.getReviewNo(); 
+//		System.out.println("추가 전 reviewNo : " + r.getReviewNo());
+//		r.setReviewNo(no);
+//		System.out.println("추가 후 reviewNo : " + r.getReviewNo());
 		try {
 			controller.insert(r);
 		} catch (AddException e) {
@@ -60,6 +67,13 @@ public class MangoTest {
 	//5. 리뷰 삭제
 	public void deleteReview() {
 		System.out.println("[리뷰 삭제]");
+		System.out.println("리뷰번호를 입력하세요");
+		int reviewNo = Integer.parseInt(sc.nextLine());
+		try {
+			controller.delete(reviewNo);
+		} catch (RemoveException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {

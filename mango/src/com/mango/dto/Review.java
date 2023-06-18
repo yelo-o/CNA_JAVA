@@ -14,7 +14,14 @@ public class Review {
 	public Review(String reviewContent, int rating, String reviewDateTime) {
 		this.reviewContent = reviewContent;
 		this.rating = rating;
-		this.reviewDateTime = reviewDateTime;
+		this.reviewDateTime = reviewDateTime; 
+	}
+	
+	public Review(String reviewContent, int rating, String reviewDateTime, int reviewNo) {
+		this.reviewContent = reviewContent;
+		this.rating = rating;
+		this.reviewDateTime = reviewDateTime; 
+		this.reviewNo = reviewNo;
 	}
 
 	public int getReviewNo() {
@@ -24,6 +31,11 @@ public class Review {
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
+	
+//	public int plusReviewNo() {
+//		reviewNo++;
+//		return reviewNo;
+//	}
 
 	public String getWriter() {
 		return writer;
@@ -61,6 +73,7 @@ public class Review {
 	}
 
 	public void print() {
+		System.out.println("리뷰 순번 : " + this.reviewNo);
 		System.out.println("리뷰 내용 : " + this.reviewContent);
 		System.out.println("별점 : " + this.rating);
 		System.out.println("작성일자 - " + this.reviewDateTime);
