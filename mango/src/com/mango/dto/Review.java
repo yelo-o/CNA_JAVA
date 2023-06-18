@@ -1,53 +1,69 @@
 package com.mango.dto;
 
 public class Review {
-	private int shopNo;
 	private int reviewNo;
+	private int rating;
 	private String writer;
 	private String reviewContent;
-	private String reviewDate;
+	private String reviewDateTime;
 	
 	public Review() {
 		
 	}
 	
-	public Review(int shopNo, int reviewNo, String writer, String reviewContent, String reviewDate) {
-		//super();
-		this.shopNo = shopNo;
-		this.reviewNo = reviewNo;
-		this.writer = writer;
+	public Review(String reviewContent, int rating, String reviewDateTime) {
 		this.reviewContent = reviewContent;
-		this.reviewDate = reviewDate;
+		this.rating = rating;
+		this.reviewDateTime = reviewDateTime;
 	}
-	
-	public int getShopNo() {
-		return shopNo;
-	}
-	public void setShopNo(int shopNo) {
-		this.shopNo = shopNo;
-	}
+
 	public int getReviewNo() {
 		return reviewNo;
 	}
+
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
+
 	public String getWriter() {
 		return writer;
 	}
+
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
+
+	public String getReviewDateTime() {
+		return reviewDateTime;
+	}
+
+	public void setReviewDateTime(String reviewDateTime) {
+		this.reviewDateTime = reviewDateTime;
+	}
+
+	
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
 	public String getReviewContent() {
 		return reviewContent;
 	}
+
 	public void setReviewContent(String reviewContent) {
 		this.reviewContent = reviewContent;
 	}
-	public String getReviewDate() {
-		return reviewDate;
-	}
-	public void setReviewDate(String reviewDate) {
-		this.reviewDate = reviewDate;
+
+	public void print() {
+		System.out.println("리뷰 내용 : " + this.reviewContent);
+		System.out.println("별점 : " + this.rating);
+		System.out.println("작성일자 - " + this.reviewDateTime);
+		System.out.println();
 	}
 }

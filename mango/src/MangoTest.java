@@ -1,11 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
+import com.mango.dao.ReviewController;
+import com.mango.dto.Review;
+import com.mango.exception.AddException;
+import com.mango.exception.FindException;
 
 public class MangoTest {
-	static Scanner sc = new Scanner(System.in); //
+	static Scanner sc = new Scanner(System.in);
+	ReviewController controller = new ReviewController();
 	
 	//1. 모든 리뷰 보여주기
 	public void serachAll() {
 		System.out.println("[모든 리뷰 검색]");
+		List<Review> resultList = new ArrayList<>();
+		try {
+			resultList = controller.selectAll();
+			for(int i=0; i<resultList.size(); i++) {
+				resultList.get(i).print();
+			}
+		} catch (FindException e) {
+			e.printStackTrace();
+		}
 	}
 	//2. 작성자로 리뷰 검색
 	public void searchByWriter() {
@@ -14,8 +34,23 @@ public class MangoTest {
 	//3. 리뷰 작성
 	public void writeReview() {
 		System.out.println("[리뷰 작성]");
-		System.out.println("제목을 입력하세요");
+		System.out.println("리뷰 내용을 입력하세요");
+		String reviewContent = sc.nextLine();
 		
+		System.out.println("별점을 입력하세요 (1 ~ 5점)");
+		int rating = Integer.parseInt(sc.nextLine());
+		if(rating < 1 || rating > 5) {
+			System.out.println("다시 입력하세요");
+		}
+		LocalDateTime now = LocalDateTime.now();
+		String reviewDateTime = now.format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss"));
+		
+		Review r = new Review(reviewContent, rating, reviewDateTime);
+		try {
+			controller.insert(r);
+		} catch (AddException e) {
+			e.printStackTrace();
+		}
 	}
 	//4. 리뷰 수정
 	public void modifyReview() {

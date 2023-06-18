@@ -1,30 +1,20 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
 	public static void main(String[] args) {
-		List<Integer> lst = new ArrayList<>(); //리스트 생성
-		int x = 10;
-		lst.add(x);
-		while(x!=1) {
-			if(x%2==0) {
-				x = x/2;
-				lst.add(x);
-			}else{
-				x = 3*x + 1;
-				lst.add(x);
-			}
-		}
-		int[] answer = new int[lst.size()];
-		for(int i=0; i<answer.length;i++) {
-			answer[i] = lst.get(i);
-		}
-//		for(int l : lst) {
-//			answer[l] = l;
-//			
-//		}
-		for(int l : answer) {
-			System.out.println(l);
-		}
+		// 현재 날짜/시간
+        LocalDateTime now = LocalDateTime.now();
+ 
+        // 현재 날짜/시간 출력
+        System.out.println(now); // 2021-06-17T06:43:21.419878100
+ 
+ 
+        // 포맷팅
+        String formatedNow = now.format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss"));
+ 
+        // 포맷팅 현재 날짜/시간 출력
+        System.out.println(formatedNow);  // 2021년 06월 17일 06시 43분 21초
+		
 	}
 }

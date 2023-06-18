@@ -40,8 +40,8 @@ public class ProductRepository{
 		try {
 			dis = new DataInputStream(new FileInputStream(fileName));
 			String prodNo = dis.readUTF();
-			String prodName = dis.readUTF();
-			int prodPrice = dis.readInt();
+//			String prodName = dis.readUTF();
+//			int prodPrice = dis.readInt();
 			if(prodNo.equals(p.getProdNo())) {
 				throw new AddException("이미 존재하는 상품입니다");
 			}
