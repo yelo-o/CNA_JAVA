@@ -50,3 +50,6 @@ BEGIN
     COMMIT;
 END;
 /
+
+DELETE FROM boards
+WHERE bno = 4;
