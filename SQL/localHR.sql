@@ -610,4 +610,148 @@ UPDATE product SET prod_name=prod_name||'음료', prod_price=3000
 WHERE prod_no LIKE 'D%';
 
 SELECT * FROM product;
+---------고객 테이블--------------
+--1. 고객테이블  생성 테이블명 : CUSTOMER
+CREATE TABLE customer(
+    id varchar2(5) constraint customer_pk PRIMARY KEY, --제약조건 이름 설정
+    pwd varchar2(10) NOT NULL,
+    name varchar2(10)
+);
 
+INSERT INTO customer(id, pwd, name) VALUES ('id1', 'p1', 'n1');
+SELECT * FROM customer;
+INSERT INTO customer(id, pwd, name) VALUES ('id1', 'aaa', 'aaa'); --PRIMARY KEY 위배
+INSERT INTO customer(id, pwd, name) VALUES ('id1', '', 'aaa'); --NOT NULL 위배
+
+--테이블용 딕셔너리 : user_tables
+--제약조건용 딕셔너리 : user_constraints
+SELECT * FROM user_constraints WHERE table_name = 'CUSTOMER';
+SELECT * FROM user_constraints WHERE table_name = 'order_line';
+SELECT * FROM user_constraints WHERE table_name = 'order_info';
+
+-----주문 테이블-------------------
+--2. 주문테이블 생성 테이블명 : ORDER_INFO
+CREATE TABLE order_info(
+    order_no number,
+    order_id varchar2(5),
+    order_dt date DEFAULT sysdate,
+    CONSTRAINT order_info_pk PRIMARY KEY(order_no),
+    CONSTRAINT order_info_fk FOREIGN KEY(order_id) REFERENCES customer(id)
+);
+
+INSERT INTO order_info(order_no, order_id) VALUES (1,'id1'); --OK
+INSERT INTO order_info(order_no, order_id) VALUES (2,'id1'); --OK
+INSERT INTO order_info(order_no, order_id) VALUES (3,'XXX'); --ERROR : 참조할 수 있는 customer 테이블의 id가 없다
+SELECT * FROM order_info;
+
+INSERT INTO order_info(order_no, order_id) VALUES (4,NULL); --OK
+DELETE order_info WHERE order_no=4;
+
+ALTER TABLE order_info
+MODIFY order_id NOT NULL;
+
+ALTER TABLE order_info
+MODIFY order_no NOT NULL;
+INSERT INTO order_info(order_no, order_id) VALUES (4,NULL); --oreder_info 테이블의 order_id에 not null 제약조건을 추가하여 이제 안됨 : ERROR
+-----주문 상세 테이블-------------------
+--3. 주문 상세 테이블 생성 테이블이름 : ORDER_LINE
+CREATE TABLE order_line(
+order_no number,
+order_prod_no varchar2(5),
+order_quantity number(2),
+CONSTRAINT order_line_pk PRIMARY KEY(order_no,order_prod_no),
+CONSTRAINT order_no_fk FOREIGN KEY(order_no) REFERENCES order_info(order_no),
+CONSTRAINT order_prod_no_fk FOREIGN KEY(order_prod_no) REFERENCES product(prod_no),
+CONSTRAINT order_quantity_ck CHECK (order_quantity > 0)
+);
+
+SELECT * FROM customer;
+SELECT * FROM product;
+SELECT * FROM order_info;
+SELECT * FROM order_line;
+--주문 여러번 하기
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (1,'C0001',3);
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (1,'C0002',1);
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (1,'C0003',2);
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (2,'C0003',1);
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (99999,'C0001',1); --ERROR
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (1,'XXXXX',1); --ERROR
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (1,'C0001',0); --ERROR
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (2,'D0001',NULL); --OK : 강제로 NULL이 입력 됨
+DELETE order_line WHERE order_no=2 AND order_prod_no='D0001';
+
+ALTER TABLE order_line
+MODIFY order_quantity NOT NULL;
+
+INSERT INTO order_line(order_no, order_prod_no, order_quantity)
+VALUES (2,'D0001',NULL); --ERROR
+
+INSERT INTO customer(id, pwd, name)
+VALUES ('id2', 'p2', '김민규');
+
+--주문번호 발급방법
+--1) MAX 함수 사용
+INSERT INTO order_info(order_no, order_id, order_dt) 
+VALUES (
+    SELECT NVL(MAX(order_no), 0) + 1 FROM order_info, --1
+    'id2',
+    SYSDATE
+    );
+--2) SEQUENCE 객체 생성사용
+
+
+--(1) SEQUENCE 생성
+CREATE SEQUENCE order_seq
+START WITH 5 --일련번호의 시작값 / 기본:1
+INCREMENT BY 2 --증가치 / 기본:1
+MAXVALUE 20 --최댓값 
+MINVALUE 1 --최솟값 
+CYCLE --값순환 : 최댓값다음 최솟값으로 순환
+NOCACHE; --미리 발급
+
+--(2) 일련번호값 얻기
+SELECT order_seq.NEXTVAL FROM dual;
+
+--(3) 일련번호값 조회
+SELECT order_seq.CURRVAL FROM dual;
+
+--(4) SEQUENCE 삭제
+DROP SEQUENCE order_seq;
+
+--(5) SEQUENCE 생성
+CREATE SEQUENCE order_seq
+START WITH 3;
+
+--id2번 고객이 'C0001' 상품을 2개 주문한다
+INSERT INTO order_info(order_no, order_id, order_dt) 
+VALUES (
+order_seq.NEXTVAL,
+'id2',
+SYSDATE
+);
+
+INSERT INTO order_line(order_no, order_prod_no, order_quantity) VALUES(
+    order_seq.CURRVAL,
+    'C0001',
+    2);
+    
+----------------------------------------------------------------------
+--고객입장
+--가입/로그인/로그아웃
+--주문자아이디에 해당하는 주문전체 조회(주문번호, 일자, 상품번호, 수량)
+--주문자아이디에 해당하는 주문번호의 상세주문내역
+
+--관리자입장
+--로그인/로그아웃
+--주문전체조회(주문번호, 일자, 주문자아이디, 주문자이름, 상품번호, 상품이름, 수량)
+--일자구간 조회
+--상품별 조회
+--주문자별 조회
