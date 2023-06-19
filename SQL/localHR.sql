@@ -604,3 +604,10 @@ DELETE product WHERE prod_name IS NULL; --prod_no가 (null)인 상품 삭제
 --NOT NULL 제약 조건 추가
 ALTER TABLE product
 MODIFY prod_name CONSTRAINT prod_name_nn NOT NULL;
+
+--prod_no가 D로 시작하는 행을 찾아서 prod_name은 prod_name'음료' 로 변경, prod_price는 3000원으로 변경
+UPDATE product SET prod_name=prod_name||'음료', prod_price=3000
+WHERE prod_no LIKE 'D%';
+
+SELECT * FROM product;
+
