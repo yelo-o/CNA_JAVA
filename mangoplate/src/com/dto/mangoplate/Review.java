@@ -3,10 +3,17 @@ package com.dto.mangoplate;
 public class Review {
 	private int shop_no;
 	private int review_no;
+	private int review_rating;
 	private String review_content;
 	private String review_date;
 	private String review_writer;
 	
+	public int getReview_rating() {
+		return review_rating;
+	}
+	public void setReview_rating(int review_rating) {
+		this.review_rating = review_rating;
+	}
 	public int getShop_no() {
 		return shop_no;
 	}
@@ -37,4 +44,13 @@ public class Review {
 	public void setReview_writer(String review_writer) {
 		this.review_writer = review_writer;
 	}
+	
+/* void print() {
+		System.out.println("리뷰 순번 : " + this.reviewNo);
+		System.out.println("리뷰 내용 : " + this.reviewContent);
+		System.out.println("별점 : " + this.rating);
+		System.out.println("작성일자 - " + this.reviewDateTime);
+		System.out.println();
+	}
+ */
 }
