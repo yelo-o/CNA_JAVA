@@ -32,10 +32,6 @@ public class Review {
 		this.reviewNo = reviewNo;
 	}
 	
-//	public int plusReviewNo() {
-//		reviewNo++;
-//		return reviewNo;
-//	}
 
 	public String getWriter() {
 		return writer;
