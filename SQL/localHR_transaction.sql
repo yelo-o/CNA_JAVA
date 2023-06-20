@@ -56,3 +56,4 @@ INSERT INTO product VALUES('D0001', '라임블렌디드음료', 3000);
 COMMIT;
 
 UPDATE product SET prod_price = 1500 WHERE prod_no='C0001';
+ROLLBACK;
