@@ -14,7 +14,7 @@ public class Review {
 	public Review(String reviewContent, int rating, String reviewDateTime) {
 		this.reviewContent = reviewContent;
 		this.rating = rating;
-		this.reviewDateTime = reviewDateTime; 
+		this.reviewDateTime = reviewDateTime;
 	}
 	
 	public Review(String reviewContent, int rating, String reviewDateTime, int reviewNo) {
