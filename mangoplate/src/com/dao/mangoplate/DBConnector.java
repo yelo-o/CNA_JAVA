@@ -14,8 +14,8 @@ public class DBConnector {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String id = "kosta";
-			String pw = "kosta";
+			String id = "sampleid";
+			String pw = "samplepw";
 			System.out.println("DB정상연결");
 			try {
 

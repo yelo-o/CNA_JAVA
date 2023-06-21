@@ -1,56 +1,53 @@
 package com.dto.mangoplate;
 
 public class Review {
-	private int shop_no;
-	private int review_no;
-	private int review_rating;
-	private String review_content;
-	private String review_date;
-	private String review_writer;
+	//필드
+	private int shopNo;
+	private int reviewNo;
+	private int reviewRating;
+	private String reviewContent;
+	private String reviewDate;
+	private String reviewWriter;
 	
-	public int getReview_rating() {
-		return review_rating;
+	//생성자
+	
+	//메소드
+	public int getShopNo() {
+		return shopNo;
 	}
-	public void setReview_rating(int review_rating) {
-		this.review_rating = review_rating;
+	public void setShopNo(int shopNo) {
+		this.shopNo = shopNo;
 	}
-	public int getShop_no() {
-		return shop_no;
+	public int getReviewNo() {
+		return reviewNo;
 	}
-	public void setShop_no(int shop_no) {
-		this.shop_no = shop_no;
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
 	}
-	public int getReview_no() {
-		return review_no;
+	public int getReviewRating() {
+		return reviewRating;
 	}
-	public void setReview_no(int review_no) {
-		this.review_no = review_no;
+	public void setReviewRating(int reviewRating) {
+		this.reviewRating = reviewRating;
 	}
-	public String getReview_content() {
-		return review_content;
+	public String getReviewContent() {
+		return reviewContent;
 	}
-	public void setReview_content(String review_content) {
-		this.review_content = review_content;
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
 	}
-	public String getReview_date() {
-		return review_date;
+	public String getReviewDate() {
+		return reviewDate;
 	}
-	public void setReview_date(String review_date) {
-		this.review_date = review_date;
+	public void setReviewDate(String reviewDate) {
+		this.reviewDate = reviewDate;
 	}
-	public String getReview_writer() {
-		return review_writer;
+	public String getReviewWriter() {
+		return reviewWriter;
 	}
-	public void setReview_writer(String review_writer) {
-		this.review_writer = review_writer;
+	public void setReviewWriter(String reviewWriter) {
+		this.reviewWriter = reviewWriter;
 	}
 	
-/* void print() {
-		System.out.println("리뷰 순번 : " + this.reviewNo);
-		System.out.println("리뷰 내용 : " + this.reviewContent);
-		System.out.println("별점 : " + this.rating);
-		System.out.println("작성일자 - " + this.reviewDateTime);
-		System.out.println();
-	}
- */
+	
 }

@@ -21,7 +21,8 @@ ADD CONSTRAINT shop_no_pk PRIMARY KEY(shop_no); --shop_no에 PK 제약조건 추가
 --3. REVIEW 테이블 생성
 CREATE TABLE review(
     review_no NUMBER(5),
-    review_content CLOB,
+    review_content VARCHAR2(100),
+    review_rating NUMBER(1),
     review_date DATE,
     user_id VARCHAR2(20),
     shop_no NUMBER(5)
@@ -54,17 +55,29 @@ INSERT INTO shop(shop_no, shop_name)
 VALUES (2, 'shop2');
 
 --리뷰 추가
-INSERT INTO review(review_no, review_content, review_date, user_id, shop_no)
-VALUES (1, '너무 맛있어요!', SYSDATE, 'id1', 1);
+INSERT INTO review(review_no, review_content, review_rating, review_date, user_id, shop_no)
+VALUES (1, '너무 맛있어요!', 5, SYSDATE, 'id1', 1);
 
-INSERT INTO review(review_no, review_content, review_date, user_id, shop_no)
-VALUES (2, '맛대가리없어요 ㅠㅠ', SYSDATE, 'id2', 2);
+INSERT INTO review(review_no, review_content, review_rating, review_date, user_id, shop_no)
+VALUES (2, '맛대가리없어요 ㅠㅠ', 1, SYSDATE, 'id2', 2);
 
 --리뷰 삭제
-DELETE review WHERE user_id='id2' AND shop_no=2;
+DELETE review WHERE user_id='id1' AND shop_no=1;
 
 --리뷰 내용 수정
 update review SET review_content = '소소한 맛이네요' WHERE user_id='id2' AND shop_no=2;
 
 --되돌리기(커밋 안 했을 때만)
 REVOKE;
+
+DROP TABLE shop;
+DROP TABLE review;
+DROP TABLE account;
+DROP TABLE menu;
+commit;
+SELECT review_no FROM review;
+
+SELECT * FROM shop WHERE shop_name LIKE '%shop%';
+
+ALTER TABLE review
+MODIFY review_content VARCHAR2(30);

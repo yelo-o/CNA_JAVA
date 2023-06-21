@@ -1,6 +1,8 @@
 package com.main.mangoplate;
 
 import java.util.Scanner;
+
+import com.dao.mangoplate.reviewController;
 import com.dao.mangoplate.shopController;
 
 
@@ -11,6 +13,7 @@ public class MangoPlate {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		shopController ceo = new shopController();
+		reviewController reviewCon = new reviewController();
 		Scanner sc = new Scanner(System.in);
 		String func_ch,ceo_ch,cus_ch,adin_ch;
 
@@ -60,6 +63,7 @@ public class MangoPlate {
 				}
 				else if(cus_ch.equals("6")) {
 					//음식점 후기 메소드 호출
+					reviewCon.reviewPage();
 				}
 			}
 
