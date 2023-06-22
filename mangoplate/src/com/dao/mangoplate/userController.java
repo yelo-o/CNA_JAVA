@@ -99,6 +99,7 @@ public class userController {
 	public static void login() {
 		String userID;
 		String passwd;
+		int userType;
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("ID를 입력하세요");
@@ -128,7 +129,8 @@ public class userController {
 			if(!rs.next()) {
 				throw new SQLException();
 			} else {
-				System.out.println("로그인이 되었습니다");												
+				System.out.println("로그인이 되었습니다");						
+				
 			}
 
 		} catch (SQLException e) {
