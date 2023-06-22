@@ -8,6 +8,23 @@ public class Shop {
 	private String shop_content;
 	private String shop_type;
 	private String shop_passwd;
+	public Shop() {
+		
+	}
+	//생성자
+	public Shop(String shop_name,String shop_content,String shop_type, String shop_passwd) {
+		this.shop_content = shop_content;
+		this.shop_name = shop_name;
+		this.shop_type = shop_type;
+		this.shop_passwd = shop_passwd;
+	}
+	public Shop(String shop_name,String shop_content,String shop_type) {
+		this.shop_content = shop_content;
+		this.shop_name = shop_name;
+		this.shop_type = shop_type;
+	}
+	
+	
 	public String getShop_passwd() {
 		return shop_passwd;
 	}
@@ -16,16 +33,15 @@ public class Shop {
 		this.shop_passwd = shop_passwd;
 	}
 
-	public Shop() {
-		
+	
+	
+	//전체 음식점 목록 리스트에 추가하기 위한 생성자
+	public Shop(String shop_name, String shop_content) {
+		this.shop_name = shop_name;
+		this.shop_content = shop_content;
 	}
 	
-	public Shop(String shop_name,String shop_content,String shop_type, String shop_passwd) {
-		this.shop_content = shop_content;
-		this.shop_name = shop_name;
-		this.shop_type = shop_type;
-		this.shop_passwd = shop_passwd;
-	}
+	
 	public int getShop_no() {
 		return shop_no;
 	}

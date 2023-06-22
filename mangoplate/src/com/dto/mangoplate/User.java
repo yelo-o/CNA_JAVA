@@ -1,9 +1,11 @@
 package com.dto.mangoplate;
 
+import java.util.Date;
+
 public class User {
 
 	private String name;
-	private String adress;
+	private String address;
 	private String userID;
 	private String passwd;
 	private String email;
@@ -11,6 +13,20 @@ public class User {
 	private String birth;
 	private int user_type;
 	
+	public User() {
+		
+	}
+	
+	public User(String name, String address, String userID, String passwd, String email, String phoneNum, String birth, int user_type) {
+		this.name = name;
+		this.address = address;
+		this.userID = userID;
+		this.passwd = passwd;
+		this.email = email;
+		this.phoneNum = phoneNum;
+		this.birth = birth;
+		this.user_type = user_type;
+	}
 
 	public String getName() {
 		return name;
@@ -18,11 +34,11 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getUserID() {
 		return userID;
