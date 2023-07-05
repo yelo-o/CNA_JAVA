@@ -9,7 +9,7 @@ public class User {
 	private String userID;
 	private String passwd;
 	private String email;
-	private String phoneNum;
+	private String phone;
 	private String birth;
 	private int user_type;
 	
@@ -17,13 +17,13 @@ public class User {
 		
 	}
 	
-	public User(String name, String address, String userID, String passwd, String email, String phoneNum, String birth, int user_type) {
-		this.name = name;
-		this.address = address;
+	public User(String userID, String passwd, String name, String address, String phone, String email, String birth, int user_type) {
 		this.userID = userID;
 		this.passwd = passwd;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
 		this.email = email;
-		this.phoneNum = phoneNum;
 		this.birth = birth;
 		this.user_type = user_type;
 	}
@@ -58,11 +58,11 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhoneNum() {
-		return phoneNum;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPhoneNum(String phoneNum) {
-		this.phoneNum = phoneNum;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getBirth() {
 		return birth;

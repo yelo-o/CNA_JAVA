@@ -2,46 +2,66 @@ package com.dto.mangoplate;
 
 public class Shop {
 
-	private int shop_no=1000;
+	private int shop_no;
 	private String shop_name;
-	private boolean shop_state;
+	private int shop_state;
 	private String shop_content;
 	private String shop_type;
-	private String shop_passwd;
+	private String ceo_id;
+
 	public Shop() {
 		
 	}
-	//생성자
-	public Shop(String shop_name,String shop_content,String shop_type, String shop_passwd) {
+	
+	public Shop(int shop_no, String shop_name, String shop_content, String shop_type, String ceo_id) {
+		super();
+		this.shop_no = shop_no;
+		this.shop_name = shop_name;
+		this.shop_content = shop_content;
+		this.shop_type = shop_type;
+		this.ceo_id = ceo_id;
+	}
+
+	public Shop(String shop_name, String shop_content, String shop_type) {
+		super();
+		this.shop_name = shop_name;
+		this.shop_content = shop_content;
+		this.shop_type = shop_type;
+	}
+
+	public Shop(int shop_no, String shop_name, String shop_content, String shop_type) {
+		
+		this.shop_no = shop_no;
+		this.shop_name = shop_name;
+		this.shop_content = shop_content;
+		this.shop_type = shop_type;
+	}
+
+	public Shop(String shop_name,String shop_content,String shop_type, String ceo_id) {
 		this.shop_content = shop_content;
 		this.shop_name = shop_name;
 		this.shop_type = shop_type;
-		this.shop_passwd = shop_passwd;
+		this.ceo_id = ceo_id;
 	}
-	public Shop(String shop_name,String shop_content,String shop_type) {
-		this.shop_content = shop_content;
+	public Shop(int shop_no, String shop_name, int shop_state, String shop_type, String ceo_id) {
+		super();
+		this.shop_no = shop_no;
 		this.shop_name = shop_name;
+		this.shop_state = shop_state;
 		this.shop_type = shop_type;
+		this.ceo_id = ceo_id;
 	}
 	
-	
-	public String getShop_passwd() {
-		return shop_passwd;
-	}
-
-	public void setShop_passwd(String shop_passwd) {
-		this.shop_passwd = shop_passwd;
-	}
-
-	
-	
-	//전체 음식점 목록 리스트에 추가하기 위한 생성자
-	public Shop(String shop_name, String shop_content) {
+	public Shop(int shop_no, String shop_name, int shop_state, String shop_content, String shop_type,
+			String ceo_id) {
+		this.shop_no = shop_no;
 		this.shop_name = shop_name;
 		this.shop_content = shop_content;
+		this.shop_state = shop_state;
+		this.shop_type = shop_type;
+		this.ceo_id = ceo_id;
 	}
-	
-	
+
 	public int getShop_no() {
 		return shop_no;
 	}
@@ -55,10 +75,10 @@ public class Shop {
 	public void setShop_name(String shop_name) {
 		this.shop_name = shop_name;
 	}
-	public boolean getShop_state() {
+	public int getShop_state() {
 		return shop_state;
 	}
-	public void setShop_state(boolean shop_state) {
+	public void setShop_state(int shop_state) {
 		this.shop_state = shop_state;
 	}
 	public String getShop_content() {
@@ -72,6 +92,12 @@ public class Shop {
 	}
 	public void setShop_type(String shop_type) {
 		this.shop_type = shop_type;
+	}
+	public String getCeo_id() {
+		return ceo_id;
+	}
+	public void setCeo_id(String ceo_id) {
+		this.ceo_id = ceo_id;
 	}
 	
 }

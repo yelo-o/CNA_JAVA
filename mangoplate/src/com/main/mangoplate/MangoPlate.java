@@ -15,7 +15,7 @@ public class MangoPlate {
       MangoPlate mango = new MangoPlate();
       shopController ceo = new shopController();
       userController user = new userController();
-      ReviewController reviewCon = new ReviewController(); 
+//      ReviewController reviewCon = new ReviewController(); 
       Scanner sc = new Scanner(System.in);
       String func_ch,ceo_ch,cus_ch,adin_ch,login_ch;
       String register_ch;
@@ -25,8 +25,8 @@ public class MangoPlate {
          login_ch = sc.nextLine();
          //로그인
          if(login_ch.equals("1")) {
-//            user.login();
-        	 reviewCon.reviewPage();
+            user.login();
+//        	 reviewCon.reviewPage();
         	 
          }//가입
          else if(login_ch.equals("2")) {
@@ -35,11 +35,11 @@ public class MangoPlate {
             register_ch = sc.nextLine();
             
             if(register_ch.equals("1")) {
-//               user_register.cus_register();
+            	//점주 고객
+//               user_register.ceo_register();
             }
             else if(register_ch.equals("2")) {
-               //점주 고객
-//               user_register.ceo_register();
+            	userController.user_register();
             }
             else if(register_ch.equals("iamadmin")) {
                //관리자
