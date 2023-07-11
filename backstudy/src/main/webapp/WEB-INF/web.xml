@@ -13,7 +13,6 @@
     <param-name>developer</param-name>
     <param-value>김민규</param-value>
   </context-param>
-  
   <servlet>
     <description></description>
     <display-name>Lifecycle</display-name>
@@ -24,21 +23,58 @@
       <param-value>a.txt</param-value>
     </init-param>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>Lifecycle</servlet-name>
     <url-pattern>/life</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>A</display-name>
     <servlet-name>A</servlet-name>
     <servlet-class>control.A</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>A</servlet-name>
     <url-pattern>/a</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Move</display-name>
+    <servlet-name>Move</servlet-name>
+    <servlet-class>control.Move</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Move</servlet-name>
+    <url-pattern>/move</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductListMVC</display-name>
+    <servlet-name>ProductListMVC</servlet-name>
+    <servlet-class>control.ProductListMVC</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductListMVC</servlet-name>
+    <url-pattern>/productlistmvc</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductListView</display-name>
+    <servlet-name>ProductListView</servlet-name>
+    <servlet-class>view.ProductListView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductListView</servlet-name>
+    <url-pattern>/productlistview</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductListMC</display-name>
+    <servlet-name>ProductListMC</servlet-name>
+    <servlet-class>control.ProductListMC</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductListMC</servlet-name>
+    <url-pattern>/productlistmc</url-pattern>
   </servlet-mapping>
 </web-app>
