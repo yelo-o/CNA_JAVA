@@ -16,5 +16,13 @@ expression을 활용 i=<%=i%>
 <%!int i; //멤버변수 선언%>
 _jspService()의 지역변수 i=<%=i %><br>
 멤버변수 i=<%=this.i %>
+
+<hr>
+<h3>include지시자를 이용한 포함</h3>
+<%@include file="./html/lifecycle.html" %>
+<hr>
+<h3>include 태그를 이용한 포함</h3>
+<jsp:include page="./html/lifecycle.html"></jsp:include>
+
 </body>
 </html>

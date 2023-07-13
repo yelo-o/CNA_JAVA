@@ -11,12 +11,12 @@ public class ProductService {
 		repository = new ProductRepository();
 	}
 
-		public List<String> findAll(int currentPage) throws FindException{
-			int cntPerPage = 4;
+	public List<String> findAll(int currentPage) throws FindException{
+		int cntPerPage = 4;
 
-			int endRow = currentPage*cntPerPage;
-			int startRow = endRow - cntPerPage + 1;
-			return repository.selectAll(startRow, endRow);
-		}
+		int endRow = currentPage*cntPerPage;
+		int startRow = endRow - cntPerPage + 1;
+		return repository.selectAll(startRow, endRow);
+	}
 
 }

@@ -11,8 +11,7 @@ import com.my.exception.FindException;
 import com.my.sql.MyConnection;
 
 public class ProductRepository {
-	public List<String> selectAll(int startRow, int endRow) 
-			throws FindException{
+	public List<String> selectAll(int startRow, int endRow) throws FindException{
 		List<String> list = new ArrayList<>();
 		
 		//1.DB와의 연결

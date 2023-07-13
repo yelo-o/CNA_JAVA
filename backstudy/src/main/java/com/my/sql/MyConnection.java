@@ -23,7 +23,6 @@ public class MyConnection {
 		if(rs!=null) {
 			try {
 				rs.close();
-				System.out.println("rs 닫음");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -31,7 +30,6 @@ public class MyConnection {
 		if(stmt!=null) {
 			try {
 				stmt.close();
-				System.out.println("stmt 닫음");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -39,7 +37,6 @@ public class MyConnection {
 		if(conn!=null) {
 			try {
 				conn.close();
-				System.out.println("conn 닫음");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

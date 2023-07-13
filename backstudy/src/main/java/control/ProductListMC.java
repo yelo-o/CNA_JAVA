@@ -40,16 +40,16 @@ public class ProductListMC extends HttpServlet {
 		List<String> list;
 		try {
 			list = service.findAll(currentPage);
-			String jsonStr = mapper.writeValueAsString(list);
+			//json문자열 형태로 직접 응답
+			String jsonStr = mapper.writeValueAsString(list); 
 			out.print(jsonStr);
 		} catch (FindException e) {
+			//json문자열 형태로 직접 응답
 			String msg = e.getMessage();
 			Map<String, String> map = new HashMap<>();
 			map.put("msg", msg);
 			String jsonStr = mapper.writeValueAsString(map);
 			out.print(jsonStr);
 		}
-		
 	}
-
 }
