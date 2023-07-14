@@ -16,8 +16,8 @@ class B extends A{
 	public B(int x) {
 		System.out.print("라");
 	}
-	
 }
+
 public class Soojebi {
 	public static void main(String[] args) {
 		B b1 = new B();

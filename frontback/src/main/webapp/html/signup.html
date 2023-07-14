@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=2.0">
+        <title>회원가입</title>
+        <link rel="stylesheet" href="../css/signup.css">
+        <script src="../js/signupjq.js"></script>
+    </head>
+
+    <body>
+        <form class="signup">
+            <label for="id">아이디:</label>
+            <input type="text"
+                   name="id" 
+                   value="id2"
+                   placeholder="아이디를 입력하세요" autocomplete="off">
+
+            <button type="button" class="dupchk" >
+                아이디 중복확인!
+            </button>
+            
+            <label for="pwd">비밀번호:</label>
+            <input name="pwd"
+                   type="password"
+                   id="p"
+                   value="a234567!"
+                   pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}">
+
+            <label for="pwd1">비밀번호확인:</label>
+            <input name="pwd1"
+                   type="password"
+                   value="a234567!" 
+                   id="p1">
+            <label for="name">이름:</label>
+            <input name="name" type="text" autocomplete="off">
+
+            <button type="submit" class="signup" style="display: none;">가입</button>
+            <!-- form 내부에
+                 button을 만들면 전송(type="submit")인 버튼이 된다
+                 type="button"으로 설정하면 일반 버튼이 된다 -->
+        </form>
+        <!-- form 외부에
+             button을 만들면 일반(type="button") 버튼이 된다 -->
+
+
+
+    </body>
+</html>

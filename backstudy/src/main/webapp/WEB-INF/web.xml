@@ -87,4 +87,24 @@
     <servlet-name>CookieTest</servlet-name>
     <url-pattern>/cookietest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SessionTest</display-name>
+    <servlet-name>SessionTest</servlet-name>
+    <servlet-class>control.SessionTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionTest</servlet-name>
+    <url-pattern>/sessiontest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SessionTest2</display-name>
+    <servlet-name>SessionTest2</servlet-name>
+    <servlet-class>control.SessionTest2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionTest2</servlet-name>
+    <url-pattern>/sessiontest2</url-pattern>
+  </servlet-mapping>
 </web-app>
