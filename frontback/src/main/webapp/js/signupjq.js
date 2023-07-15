@@ -46,9 +46,6 @@
         //가입버튼(전송버튼) 클릭 -> 폼의 submit이벤트발생
         //--폼 submit이벤트 발생시 할 일 START--
         formObj.submit((e)=>{
-			if(e.keycode === 13){
-				return false;
-			}
             //비밀번호1, 2가 일치 확인
             // const pwdObj = document.querySelector('form.signup>input[name=pwd]')
             const pwdObj = $('form.signup>input[name=pwd]')
