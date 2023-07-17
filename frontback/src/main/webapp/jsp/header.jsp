@@ -16,7 +16,7 @@
 			<li><a href="logout">로그아웃</a></li>
 			<%} %>
 			
-			<li><a href="<%=contextPath %>/html/productlist.html">상품목록</a></li>
+			<li><a href="productlist">상품목록</a></li>
 			<li><a href="#">장바구니목록</a></li>
 			<li><a href="#">주문목록</a></li>
 		</ul>

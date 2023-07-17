@@ -34,9 +34,9 @@ $(() => {
                 showAjax($(e.target).attr('href'), sectionObj)
                 break
 
-            case `./productlist.html`: //상품 목록
+            case `productlist`: //상품 목록
                 console.log('상품 목록 클릭');
-                location.href = `${frontURL}/productlist.html` //상품리스트 페이지 이동
+                location.href = `${backURL}/productlist` //상품리스트 페이지 이동
                 break
         }
         return false;

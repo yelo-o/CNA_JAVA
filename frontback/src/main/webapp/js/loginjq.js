@@ -31,8 +31,8 @@ $( ()=>{
                     location.href='layout.jsp'
                 }
             },
-            error: ()=>{ //404, 500번대, CORS 에러
-
+            error: (xhr)=>{ //404, 500번대, CORS 에러
+            	alert("에러" + xhr.status)
             }
         })
         return false

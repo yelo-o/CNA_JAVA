@@ -1,35 +1,50 @@
-section {
-    background-color: lightcoral !important; 
-}
+section{
+    background-color: lightcoral !important;
 
-section>div.productlist {
+}
+section>div.productlist{
     overflow: auto;
     width: 100%;
 }
-
-section>div.productlist>div.product {
-    display: inline-block;
-    width: 20%;
+section>div.productlist> div.product{
+    display: inline;
+    width: 25%;
+    float: left;
 }
-
-section>div.productlist>div.product>ul {
+section>div.productlist> div.product>ul{
     width: 100%;
-    list-style-type: none;
-    padding :10px;
+    padding-left : 10px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    list-style: none;
 }
-section>div.productlist>div.product>ul>li {
+section>div.productlist> div.product>ul>li{
+
+    
     width: 100%;
     margin: 5px;
-    /* text-align: center; */
-}
-
-
-section>div.productlist>div.product>ul>li>img {
-    width: 50%;
-}
-
-section>div.productlist>div.product>ul>li>span {
-    display: block;
-    width: 50%;
     text-align: center;
+}
+section>div.productlist> div.product>ul>li>img{
+    width: 70%;
+}
+section>div.productlist> div.product>ul>li>span{
+    border: 2px solid;
+    border-radius: 10px;
+    
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+section>div.pagegroup{
+	text-align:center;
+	background-color:white;
+	height : 5%;
+	width : 100%;
+}
+section>div.pagegroup>span:hover{
+	background-color: gray;
 }
