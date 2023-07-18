@@ -9,13 +9,13 @@ $(() => {
     //on('이벤트종류', '객체', '할 일') 함수를 써야 함
     $('div.product').click((e)=>{ 
         const prodNo = $(e.currentTarget).attr('class').split(" ")[1]
-        alert(prodNo + ' clicked')
+        //alert(prodNo + ' clicked')
         $.ajax({
 			url:`${backURL}/product`,
 			method:'get',
 			data: `prodNo=${prodNo}`,
 			success: (responseData)=>{
-				console.log("responseData : ",responseData)
+				//console.log("responseData : ",responseData)
 				$('section').empty()
 				//$('section').html(responseData)
 				$('section').html(responseData)

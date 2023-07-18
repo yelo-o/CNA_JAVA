@@ -17,7 +17,7 @@
 			<%} %>
 			
 			<li><a href="productlist">상품목록</a></li>
-			<li><a href="#">장바구니목록</a></li>
+			<li><a href="cartlist">장바구니목록</a></li>
 			<li><a href="#">주문목록</a></li>
 		</ul>
 	</nav>

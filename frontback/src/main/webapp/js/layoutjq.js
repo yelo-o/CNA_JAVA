@@ -14,6 +14,7 @@ $(() => {
     //--메뉴 클릭될때 할 일 START--
     menuObjs.click((e) => {
         console.log($(e.target).attr('href'))
+        
         switch ( $(e.target).attr('href') ) {
             case `/frontback/jsp/login.jsp`://로그인 메뉴
                 console.log('로그인 클릭')
@@ -37,6 +38,11 @@ $(() => {
             case `productlist`: //상품 목록
                 console.log('상품 목록 클릭');
                 location.href = `${backURL}/productlist` //상품리스트 페이지 이동
+                break
+            case `cartlist`: //상품 목록
+                console.log('장바구니목록 클릭');
+                showAjax($(e.target).attr('href'), sectionObj)
+                //location.href = `${backURL}/cartlist` //상품리스트 페이지 이동
                 break
         }
         return false;

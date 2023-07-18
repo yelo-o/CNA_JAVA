@@ -15,7 +15,7 @@ public class MyConnection {
 		String password = "hr";
 		
 		conn = DriverManager.getConnection(url, user, password);
-		System.out.println("연결 성공");
+		//System.out.println("연결 성공");
 		return conn;
 	}
 	
