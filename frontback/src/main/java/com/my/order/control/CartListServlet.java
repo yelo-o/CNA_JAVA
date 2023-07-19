@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.my.exception.FindException;
+import com.my.order.service.OrderService;
 import com.my.product.dto.Product;
 import com.my.product.service.ProductService;
 
@@ -21,7 +22,8 @@ public class CartListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService service;
 	public CartListServlet() {
-		service = new ProductService();
+		//service = new ProductService();
+		service = ProductService.getInstance();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session  =  request.getSession();

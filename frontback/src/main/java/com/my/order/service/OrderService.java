@@ -13,10 +13,16 @@ import com.my.order.dto.OrderLine;
 import com.my.product.dto.Product;
 
 public class OrderService {
+	private static OrderService service = new OrderService();
 	private OrderRepository repository;
 	public OrderService() {
 		repository = new OrderRepository();
 	}
+	
+	public static OrderService getInstance() {
+		return service;
+	}
+	
 	public void add(String loginedId, 
 			         Map<String,Integer> cart) throws AddException{
 		

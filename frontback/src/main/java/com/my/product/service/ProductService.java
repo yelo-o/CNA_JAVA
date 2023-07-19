@@ -8,9 +8,14 @@ import com.my.product.dto.Product;
 import com.my.util.PageBean;
 
 public class ProductService {
+	private static ProductService service = new ProductService();
 	private ProductRepository repository;
 	public ProductService() {
 		repository = new ProductRepository();
+	}
+	
+	public static ProductService getInstance() {
+		return service;
 	}
 
 	public Product findByProdNo(String prodNo) throws FindException{
