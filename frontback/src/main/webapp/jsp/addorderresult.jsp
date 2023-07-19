@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%--addorderresult.jsp--%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-String msg = (String)request.getAttribute("msg");
-if(msg != null){//로그인 안된 경우, 장바구니가 비어있는 경우
-%><%=msg%>
-<%
-	return;
-}
-%>
-<%=request.getAttribute("status")%>
+<c:set var="msg" value="${requestScope.msg}"></c:set>
+<c:choose>
+	<c:when test="${!empty msg}">
+		<c:out value="${msg}"/>
+	</c:when>
+	<c:otherwise>
+		<c:out value="${msg}"/>
+	</c:otherwise>
+</c:choose>
