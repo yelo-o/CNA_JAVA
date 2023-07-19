@@ -6,9 +6,15 @@ import com.my.exception.AddException;
 import com.my.exception.FindException;
 
 public class CustomerService {
-	public CustomerRepository repository;
-	public CustomerService() {
+	private static CustomerService service = new CustomerService();
+	private CustomerRepository repository;
+	
+	private CustomerService() {
 		repository = new CustomerRepository(); 
+	}
+	
+	public static CustomerService getInstance() {
+		return service;
 	}
 	
 	public void idDupChk(String id) throws FindException{
@@ -44,7 +50,5 @@ public class CustomerService {
 		if(c != null) {
 			throw new AddException("가입 실패");
 		}
-		
 	}
-
 }
