@@ -44,6 +44,11 @@ $(() => {
                 showAjax($(e.target).attr('href'), sectionObj)
                 //location.href = `${backURL}/cartlist` //상품리스트 페이지 이동
                 break
+            case `orderlist`: //주문 목록
+                console.log('주문목록 클릭');
+                //showAjax($(e.target).attr('href'), sectionObj)
+                location.href = `${backURL}/orderlist` //상품리스트 페이지 이동
+                break
         }
         return false;
     })
