@@ -2,10 +2,8 @@ package com.my.customer.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +13,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.my.customer.dto.Customer;
 import com.my.exception.AddException;
 import com.my.exception.FindException;
-import com.my.sql.MyConnection;
 
 public class CustomerRepository {
 	private SqlSessionFactory sessionFactory;
@@ -34,7 +31,7 @@ public class CustomerRepository {
 		try {
 			session = sessionFactory.openSession();//Connection과 같은 뜻
 			Customer c = session.selectOne( //한 행만 검색할 때
-					"com.my.customer.mapper.CustommerMapper.selectById",
+					"com.my.customer.mapper.CustomerMapper.selectById",
 					 id);
 			           //session.selectList() <= 여러행 검색할 때
 			if(c == null) {
@@ -86,7 +83,12 @@ public class CustomerRepository {
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
-			session.insert("com.my.customer.mapper.CustommerMapper.insert", c);
+//			session.insert("com.my.customer.mapper.CustomerMapper.insert", c);
+			Map<String, String> map = new HashMap<>();
+			map.put("i", c.getId());
+			map.put("p", c.getPwd());
+			map.put("n", c.getName());
+			session.insert("com.my.customer.mapper.CustomerMapper.insert", map);
 			session.commit();
 		} catch(Exception e) {
 			e.printStackTrace();

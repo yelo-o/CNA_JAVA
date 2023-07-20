@@ -22,15 +22,15 @@
 			<c:set var="orderNo" value="${info.orderNo}"/>
 			<c:set var="orderDt" value="${info.orderDt}"/>
 			<c:set var="lines" value="${info.lines}"/>
-			<c:set var="linesSize" value="${lines.siez()}"/>
+			<c:set var="linesSize" value="${lines.size()}"/>
 			<tr>
 				<td rowspan="<c:out value="${linesSize}"/>"><c:out value="${orderNo}"/></td>
 				<td rowspan="<c:out value="${linesSize}"/>"><c:out value="${orderDt}"/></td>
 			<c:forEach items="${lines}" var="line">
 			<c:set var="p" value="${line.orderP}"/>
-			<c:set var="prodNo" value="${line.prodNo}"/>
-			<c:set var="prodName" value="${line.prodName}"/>
-			<c:set var="prodPrice" value="${line.prodPrice}"/>
+			<c:set var="prodNo" value="${line.orderP.prodNo}"/>
+			<c:set var="prodName" value="${line.orderP.prodName}"/>
+			<c:set var="prodPrice" value="${line.orderP.prodPrice}"/>
 			<c:set var="orderQuantity" value="${line.orderQuantity}"/>
 			<td><c:out value="${prodNo}"/>
 			<td><c:out value="${prodName}"/>

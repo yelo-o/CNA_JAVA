@@ -1,5 +1,7 @@
 package com.my.order.dao;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
 import com.my.exception.AddException;
 import com.my.exception.FindException;
 import com.my.order.dto.OrderInfo;
@@ -17,19 +24,61 @@ import com.my.product.dto.Product;
 import com.my.sql.MyConnection;
 
 public class OrderRepository {
-
-	//public List<Map<String, Object>> selectById(String id) throws FindException{
-	public List<OrderInfo> selectById(String id) throws FindException{
-		//		List<Map<String, Object>> list = new ArrayList<>();
-		List<OrderInfo> list = new ArrayList<>();
-		Connection conn = null;
+	private SqlSessionFactory sessionFactory;
+	public OrderRepository() {
+		String resource = "/mybatisconfig/mybatis-config.xml";
+		InputStream inputStream;
 		try {
-			conn = MyConnection.getConnection();
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			inputStream = Resources.getResourceAsStream(resource);
+			sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public List<OrderInfo> selectById(String id) throws FindException{
+		SqlSession session = null;
+		List<OrderInfo> test = new ArrayList<>();
+		try {
+			session = sessionFactory.openSession();
+//			List<Map<String, Object>> list = 
+//					session.selectList("com.my.order.mapper.OrderMapper.selectById", id);
+//			for(Map<String, Object> map:list) {
+//				for(String key:map.keySet()) {
+//					Object value = map.get(key);
+//					System.out.println(key + "=" + value);
+//				}
+//				System.out.println("--------------------");
+//			}
+			List<OrderInfo> list = session.selectList("com.my.order.mapper.OrderMapper.selectById", id);
+			for(OrderInfo info:list) {
+				System.out.println("주문번호 : " + info.getOrderNo());
+				System.out.println("주문일자 : " + info.getOrderDt());
+				System.out.println("주문상세들" + info.getLines());
+				for(OrderLine line : info.getLines()) {
+					Product p = line.getOrderP();
+					System.out.println(p.getProdNo() + ":" + p.getProdName() + ":" + p.getProdPrice());
+					System.out.println(":" + line.getOrderQuantity());
+				}
+				
+			}
+			return list;
+		} catch(Exception e) {
+			throw new FindException(e.getMessage());
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+//		Connection conn = null;
+//		try {
+//			conn = MyConnection.getConnection();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+		/*
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String selectByIdSQL = "SELECT info.order_no, info.order_dt,\r\n"
@@ -79,49 +128,78 @@ public class OrderRepository {
 		} finally {
 			MyConnection.close(rs, pstmt, conn);
 		}
+		*/
 	}
 	public void insert(OrderInfo info) throws AddException{
-		Connection conn = null;		
+//		Connection conn = null;		
+//		try {
+//			conn = MyConnection.getConnection();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//			throw new AddException(e.getMessage());
+//		}
+		SqlSession session = null;
 		try {
-			conn = MyConnection.getConnection();
-		} catch (ClassNotFoundException | SQLException e) {
+			session = sessionFactory.openSession();
+			insertInfo(session, info);
+			List<OrderLine> lines = info.getLines();
+			for(OrderLine line: lines) {
+				insertLine(session, line);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+	}
+	
+	private void insertInfo(SqlSession session,OrderInfo info) throws AddException{
+		try {
+			session = sessionFactory.openSession();
+			session.insert("com.my.order.mapper.OrderMapper.insertInfo", info.getOrderId());
+			session.commit();
+		} catch(Exception e) {
 			e.printStackTrace();
 			throw new AddException(e.getMessage());
 		}
-		insertInfo(conn, info);
-		List<OrderLine> lines = info.getLines();
-		for(OrderLine line: lines) {
-			insertLine(conn, line);
-		}		
-		MyConnection.close(null, null, conn);
-	}
-	private void insertInfo(Connection conn,OrderInfo info) throws AddException{
+		
 		//행추가 order_seq.NEXTVAL
-		PreparedStatement pstmt = null;
-		String insertInfoSQL = "INSERT INTO order_info(order_no, order_id, order_dt) VALUES (order_seq.NEXTVAL, ?, SYSDATE)";
-
-		try {
-			pstmt = conn.prepareStatement(insertInfoSQL);
-			pstmt.setString(1, info.getOrderId());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new AddException(e.getMessage());
-		}
+//		PreparedStatement pstmt = null;
+//		String insertInfoSQL = "INSERT INTO order_info(order_no, order_id, order_dt) VALUES (order_seq.NEXTVAL, ?, SYSDATE)";
+//
+//		try {
+//			pstmt = conn.prepareStatement(insertInfoSQL);
+//			pstmt.setString(1, info.getOrderId());
+//			pstmt.executeUpdate();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			throw new AddException(e.getMessage());
+//		}
 	}
-	private void insertLine(Connection conn, OrderLine line) throws AddException{
-		//행추가 order_seq.CURRVAL :X		
-		PreparedStatement pstmt = null;
-		String insertLineSQL = "INSERT INTO order_line(order_no, order_prod_no, order_quantity) VALUES (order_seq.CURRVAL, ?, ?)";
+	private void insertLine(SqlSession session, OrderLine line) throws AddException{
 		try {
-			pstmt = conn.prepareStatement(insertLineSQL);
-//			pstmt.setString(1, line.getOrderProdNo());
-			pstmt.setString(1, line.getOrderP().getProdNo());
-			pstmt.setInt(2, line.getOrderQuantity());
-			pstmt.executeUpdate();
-		}catch(SQLException e) {
+			//session = sessionFactory.openSession();
+			session.insert("com.my.order.mapper.OrderMapper.insertLine", line);
+			session.commit();
+		} catch(Exception e) {
 			e.printStackTrace();
 			throw new AddException(e.getMessage());
 		}
+		
+		//행추가 order_seq.CURRVAL :X		
+//		PreparedStatement pstmt = null;
+//		String insertLineSQL = "INSERT INTO order_line(order_no, order_prod_no, order_quantity) VALUES (order_seq.CURRVAL, ?, ?)";
+//		try {
+//			pstmt = conn.prepareStatement(insertLineSQL);
+////			pstmt.setString(1, line.getOrderProdNo());
+//			pstmt.setString(1, line.getOrderP().getProdNo());
+//			pstmt.setInt(2, line.getOrderQuantity());
+//			pstmt.executeUpdate();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//			throw new AddException(e.getMessage());
+//		}
 	}
 }
