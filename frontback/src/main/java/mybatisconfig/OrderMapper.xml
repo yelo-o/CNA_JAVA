@@ -22,12 +22,18 @@ JOIN product p ON (line.order_prod_no = p.prod_no)
 WHERE order_id = #{id}
 </select>
 
-<select id="insertInfo" parameterType="string">
-INSERT INTO order_info(order_no, order_id, order_dt) VALUES (order_seq.NEXTVAL, #{order_id}, SYSDATE)
-</select>
+<insert id="insertInfo" parameterType="OrderInfo">
+  <selectKey keyProperty="orderNo" 
+		     resultType="int" 
+		     order="AFTER">
+    select order_seq.CURRVAL FROM dual
+  </selectKey>
+INSERT INTO order_info(order_no, order_id, order_dt)
+VALUES (order_seq.NEXTVAL, #{orderId}, SYSDATE)
+</insert>
+
 <select id="insertLine" parameterType="Orderline">
 INSERT INTO order_line(order_no, order_prod_no, order_quantity)
 VALUES (order_seq.CURRVAL, #{orderP.prodNo}, #{orderQuantity})
-
 </select>
 </mapper>

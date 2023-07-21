@@ -28,16 +28,16 @@
 				<td rowspan="<c:out value="${linesSize}"/>"><c:out value="${orderDt}"/></td>
 			<c:forEach items="${lines}" var="line">
 			<c:set var="p" value="${line.orderP}"/>
-			<c:set var="prodNo" value="${line.orderP.prodNo}"/>
-			<c:set var="prodName" value="${line.orderP.prodName}"/>
-			<c:set var="prodPrice" value="${line.orderP.prodPrice}"/>
+			<c:set var="prodNo" value="${p.prodNo}"/>
+			<c:set var="prodName" value="${p.prodName}"/>
+			<c:set var="prodPrice" value="${p.prodPrice}"/>
 			<c:set var="orderQuantity" value="${line.orderQuantity}"/>
 			<td><c:out value="${prodNo}"/>
 			<td><c:out value="${prodName}"/>
 			<td><c:out value="${prodPrice}"/>
 			<td><c:out value="${orderQuantity}"/>
-			</c:forEach>
 		    </tr>
+		</c:forEach>
 		</c:forEach>
 		</table>
 	</c:otherwise>

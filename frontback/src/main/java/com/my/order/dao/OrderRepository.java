@@ -37,32 +37,25 @@ public class OrderRepository {
 	}
 
 	public List<OrderInfo> selectById(String id) throws FindException{
-		SqlSession session = null;
 		List<OrderInfo> test = new ArrayList<>();
+		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
-//			List<Map<String, Object>> list = 
-//					session.selectList("com.my.order.mapper.OrderMapper.selectById", id);
-//			for(Map<String, Object> map:list) {
-//				for(String key:map.keySet()) {
-//					Object value = map.get(key);
-//					System.out.println(key + "=" + value);
-//				}
-//				System.out.println("--------------------");
-//			}
-			List<OrderInfo> list = session.selectList("com.my.order.mapper.OrderMapper.selectById", id);
+			List<OrderInfo> list = session.selectList(
+					"com.my.order.mapper.OrderMapper.selectById",
+					id);
 			for(OrderInfo info:list) {
 				System.out.println("주문번호 : " + info.getOrderNo());
 				System.out.println("주문일자 : " + info.getOrderDt());
-				System.out.println("주문상세들" + info.getLines());
+				System.out.println("주문상세들 : ");
 				for(OrderLine line : info.getLines()) {
 					Product p = line.getOrderP();
 					System.out.println(p.getProdNo() + ":" + p.getProdName() + ":" + p.getProdPrice());
 					System.out.println(":" + line.getOrderQuantity());
 				}
-				
+				System.out.println("--------------------");
 			}
-			return list;
+			return test;
 		} catch(Exception e) {
 			throw new FindException(e.getMessage());
 		} finally {
@@ -131,56 +124,39 @@ public class OrderRepository {
 		*/
 	}
 	public void insert(OrderInfo info) throws AddException{
-//		Connection conn = null;		
-//		try {
-//			conn = MyConnection.getConnection();
-//		} catch (ClassNotFoundException | SQLException e) {
-//			e.printStackTrace();
-//			throw new AddException(e.getMessage());
-//		}
 		SqlSession session = null;
 		try {
 			session = sessionFactory.openSession();
-			insertInfo(session, info);
-			List<OrderLine> lines = info.getLines();
-			for(OrderLine line: lines) {
-				insertLine(session, line);
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(session != null) {
-				session.close();
-			}
-		}
-	}
-	
-	private void insertInfo(SqlSession session,OrderInfo info) throws AddException{
-		try {
-			session = sessionFactory.openSession();
-			session.insert("com.my.order.mapper.OrderMapper.insertInfo", info.getOrderId());
-			session.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new AddException(e.getMessage());
 		}
 		
-		//행추가 order_seq.NEXTVAL
-//		PreparedStatement pstmt = null;
-//		String insertInfoSQL = "INSERT INTO order_info(order_no, order_id, order_dt) VALUES (order_seq.NEXTVAL, ?, SYSDATE)";
-//
-//		try {
-//			pstmt = conn.prepareStatement(insertInfoSQL);
-//			pstmt.setString(1, info.getOrderId());
-//			pstmt.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			throw new AddException(e.getMessage());
-//		}
+		insertInfo(session, info);
+		List<OrderLine> lines = info.getLines();
+		for(OrderLine line: lines) {
+			insertLine(session, line);
+		}
+		session.close();
+	}
+	
+	private void insertInfo(SqlSession session,OrderInfo info) throws AddException{
+		try {
+			session.insert("com.my.order.mapper.OrderMapper.insertInfo",
+					//info.getOrderId()
+					info
+					);
+			System.out.println("in OrderRepository insertInfo : info.getOrderNo() = "+ info.getOrderNo());
+			session.commit();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new AddException(e.getMessage());
+		}
+		
 	}
 	private void insertLine(SqlSession session, OrderLine line) throws AddException{
 		try {
-			//session = sessionFactory.openSession();
 			session.insert("com.my.order.mapper.OrderMapper.insertLine", line);
 			session.commit();
 		} catch(Exception e) {
@@ -188,18 +164,5 @@ public class OrderRepository {
 			throw new AddException(e.getMessage());
 		}
 		
-		//행추가 order_seq.CURRVAL :X		
-//		PreparedStatement pstmt = null;
-//		String insertLineSQL = "INSERT INTO order_line(order_no, order_prod_no, order_quantity) VALUES (order_seq.CURRVAL, ?, ?)";
-//		try {
-//			pstmt = conn.prepareStatement(insertLineSQL);
-////			pstmt.setString(1, line.getOrderProdNo());
-//			pstmt.setString(1, line.getOrderP().getProdNo());
-//			pstmt.setInt(2, line.getOrderQuantity());
-//			pstmt.executeUpdate();
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//			throw new AddException(e.getMessage());
-//		}
 	}
 }
