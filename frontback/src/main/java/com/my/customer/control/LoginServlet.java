@@ -26,15 +26,14 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String pwd= request.getParameter("pwd");
-		//세션얻기
-		HttpSession session = request.getSession();
-		session.removeAttribute("loginedId"); //클리어한다
+		
+		HttpSession session = request.getSession();//세션얻기
+		session.removeAttribute("loginedId"); //세션 속성에 뭐가 들어있는지 모르니 클리어한다
 		int status = 0; 
 		try {
 			Customer c = service.login(id, pwd);
 			status = 1;
 			session.setAttribute("loginedId", id);
-			
 			
 		} catch(FindException e) {
 			e.printStackTrace();
