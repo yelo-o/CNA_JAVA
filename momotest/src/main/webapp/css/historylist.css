@@ -1,0 +1,7 @@
+table.historylist{
+	border:1px solid;
+	border-collapse:collapse;
+}
+table.historylist td, table.historylist th{
+	border:1px solid;
+}

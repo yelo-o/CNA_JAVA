@@ -1,9 +1,10 @@
 package com.momo.customer.service;
 
+import com.momo.customer.dao.CustomerRepository;
 import com.momo.customer.dto.Customer;
+import com.momo.customer.dto.Histories;
 import com.momo.exception.AddException;
 import com.momo.exception.FindException;
-import com.momo.customer.dao.CustomerRepository;
 
 public class CustomerService {
 	private static CustomerService service = new CustomerService();
@@ -50,5 +51,8 @@ public class CustomerService {
 		if(c != null) {
 			throw new AddException("가입 실패");
 		}
+	}
+	public Histories getHistoryList() {
+		return new Histories();
 	}
 }
