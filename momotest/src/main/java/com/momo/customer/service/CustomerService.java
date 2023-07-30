@@ -52,7 +52,7 @@ public class CustomerService {
 			throw new AddException("가입 실패");
 		}
 	}
-	public Histories getHistoryList() {
-		return new Histories();
-	}
+	
+	
+	
 }
